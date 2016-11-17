@@ -1,7 +1,7 @@
 export class User {
     firstName: string
     lastName: string
-    email: string 
+    email: string
     authorities: string[]
 
     /**
@@ -14,7 +14,7 @@ export class User {
         let index = this.authorities.findIndex(v => {
             let value = v.toUpperCase().startsWith('ROLE_') ? v.slice(5, v.length) : v
             let roleS = role.toUpperCase().startsWith('ROLE_') ? role.slice(5, role.length) : role
-            return value.toLowerCase() == roleS.toLowerCase()
+            return value.toLowerCase() === roleS.toLowerCase()
         })
         return index > -1
     }
@@ -24,7 +24,7 @@ export class User {
      */
     hasAuthority(authority: string): boolean {
         let index = this.authorities.findIndex(v => {
-            return v.toLowerCase() == authority.toLowerCase()
+            return v.toLowerCase() === authority.toLowerCase()
         })
         return index > -1
     }

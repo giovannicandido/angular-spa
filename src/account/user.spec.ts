@@ -1,4 +1,4 @@
-import { User } from './user';
+import { User } from './user'
 
 describe("user", function(){
     it("should verify userInRole", () => {
