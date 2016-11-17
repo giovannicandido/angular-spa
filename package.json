@@ -1,6 +1,6 @@
 {
   "name": "angular-spa",
-  "version": "0.1.4",
+  "version": "0.1.0",
   "description": "Utilities for angular 2 applications backed by generator-spring-spa project",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atende/angular-http-interceptor.git"
+    "url": "git+https://github.com/atende/angular-spa.git"
   },
   "keywords": [
     "angular2",
@@ -28,9 +28,9 @@
   "author": "Giovanni Silva",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/atende/angular-http-interceptor/issues"
+    "url": "https://github.com/atende/angular-angular-spa/issues"
   },
-  "homepage": "https://github.com/atende/angular-http-interceptor#readme",
+  "homepage": "https://github.com/atende/angular-angular-spa#readme",
   "dependencies": {
     "@angular/common": ">=2.0.0 <=3.0.0",
     "@angular/core": ">=2.0.0 <=3.0.0",
