@@ -13,4 +13,8 @@ export class UserService {
     getCurrentUser(): Observable<User> {
         return this.http.get("/api/account").map(r => r.json())
     }
+
+    logout() {
+        this.http.post("/sso/logout", null).subscribe()
+    }
 }

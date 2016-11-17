@@ -17,4 +17,14 @@ describe("user", function(){
         expect(user.hasAuthority('CheckEmail')).toBeTruthy()
         expect(user.hasAuthority('ROLE_CheckEmail')).toBeFalsy()
     })
+    it('should return fullName', function(){
+        let user = new User()
+        user.firstName = 'First'
+        user.lastName = 'Last'
+        expect(user.fullName).toEqual('First Last')
+
+        user.firstName = 'First   '
+        user.lastName = '  Last   '
+        expect(user.fullName).toEqual('First Last')
+    })
 })

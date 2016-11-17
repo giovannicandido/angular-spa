@@ -1,7 +1,8 @@
 export class User {
-    firstName: string
-    lastName: string
+    private _firstName: string
+    private _lastName: string
     email: string
+    login: string
     authorities: string[]
 
     /**
@@ -27,5 +28,25 @@ export class User {
             return v.toLowerCase() === authority.toLowerCase()
         })
         return index > -1
+    }
+
+    get firstName(): string {
+        return this._firstName.trim()
+    }
+
+    set firstName(firstName: string) {
+        this._firstName = firstName
+    }
+
+    get lastName(): string {
+        return this._lastName.trim()
+    }
+
+    set lastName(lastName: string) {
+        this._lastName = lastName
+    }
+
+    get fullName(): string {
+        return `${this.firstName} ${this.lastName}`
     }
 }
