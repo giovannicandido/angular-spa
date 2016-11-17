@@ -15,6 +15,6 @@ export class UserService {
     }
 
     logout() {
-        this.http.post("/sso/logout", null).subscribe()
+        this.http.post("/api/logout", null).subscribe()
     }
 }
