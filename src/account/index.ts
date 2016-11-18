@@ -1,2 +1,2 @@
 export * from './account.service'
-export * from './user'
+export * from './account'

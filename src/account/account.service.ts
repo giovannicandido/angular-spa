@@ -1,16 +1,17 @@
+import { Injectable } from '@angular/core'
 import { Http } from "@angular/http"
 
 import { Observable } from "rxjs/Observable"
 
-import { User } from "./user"
+import { Account } from "./account"
 
-
-export class UserService {
+@Injectable()
+export class AccountService {
     constructor(private http: Http) {
 
     }
 
-    getCurrentUser(): Observable<User> {
+    getLoginAccount(): Observable<Account> {
         return this.http.get("/api/account").map(r => r.json())
     }
 

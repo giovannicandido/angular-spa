@@ -1,4 +1,4 @@
-export class User {
+export class Account {
     private _firstName: string
     private _lastName: string
     email: string
@@ -11,7 +11,7 @@ export class User {
      * @param role The role matches ignoring if start with ROLE_.
      *        the param ROLE_ADMIN and ADMIN match
      */
-    isUserInRole(role: string): boolean {
+    isAccountInRole(role: string): boolean {
         let index = this.authorities.findIndex(v => {
             let value = v.toUpperCase().startsWith('ROLE_') ? v.slice(5, v.length) : v
             let roleS = role.toUpperCase().startsWith('ROLE_') ? role.slice(5, role.length) : role
