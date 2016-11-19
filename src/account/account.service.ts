@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core'
-import { Http } from "@angular/http"
+import { Http, Response } from "@angular/http"
 
 import { Observable } from "rxjs/Observable"
+import "rxjs/add/operator/toPromise"
 
 import { Account } from "./account"
 
@@ -15,7 +16,7 @@ export class AccountService {
         return this.http.get("/api/account").map(r => r.json())
     }
 
-    logout() {
-        this.http.post("/api/logout", null).subscribe()
+    logout(): Promise<Response> {
+        return this.http.post("/api/logout", null).toPromise()
     }
 }
