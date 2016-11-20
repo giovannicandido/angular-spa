@@ -1,8 +1,17 @@
 export class Account {
     private _firstName: string
     private _lastName: string
+    private _fullName: string
     email: string
     login: string
+    picture: string
+    website: string
+    gender: string
+    locale: string
+    phoneNumber: string
+    phoneNumberVerified: boolean
+    updatedAt: number
+    profile: string
     authorities: string[]
 
     /**
@@ -47,6 +56,10 @@ export class Account {
     }
 
     get fullName(): string {
-        return `${this.firstName} ${this.lastName}`
+        return this._fullName.trim()
+    }
+
+    set fullName(value: string) {
+        this._fullName = value;
     }
 }

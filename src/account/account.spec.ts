@@ -19,12 +19,9 @@ describe("account", function(){
     })
     it('should return fullName', function(){
         let account = new Account()
-        account.firstName = 'First'
-        account.lastName = 'Last'
+        account.fullName = 'First Last'
         expect(account.fullName).toEqual('First Last')
-
-        account.firstName = 'First   '
-        account.lastName = '  Last   '
+        account.fullName = '  First Last  '
         expect(account.fullName).toEqual('First Last')
     })
 })
