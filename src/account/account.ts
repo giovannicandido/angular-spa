@@ -60,6 +60,6 @@ export class Account {
     }
 
     set fullName(value: string) {
-        this._fullName = value;
+        this._fullName = value
     }
 }
