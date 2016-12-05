@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core'
 import { HttpModule } from '@angular/http'
-import { AccountService } from './account/account.service'
+import { AuthService } from './auth/auth.service'
 
 @NgModule({
     imports: [
         HttpModule
     ],
     providers: [
-        AccountService
+        AuthService
     ]
 })
 export class AngularSpaModule {
