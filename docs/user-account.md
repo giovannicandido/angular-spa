@@ -98,3 +98,7 @@ You can get the username, fullName and other informations from keycloak
 It also provide access to the underline keycloak object that has all KeycloakJS API.
 
 See [https://keycloak.gitbooks.io/securing-client-applications-guide/content/v/2.4/topics/oidc/javascript-adapter.html](https://keycloak.gitbooks.io/securing-client-applications-guide/content/v/2.4/topics/oidc/javascript-adapter.html)
+
+## Authentication Directives:
+
+See [directives](./directives.md)
