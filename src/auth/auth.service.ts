@@ -15,9 +15,21 @@ export interface KeycloakPromise {
 
 export interface InitOptions {
   /**
+   * URL for the keycloak server
+   */
+  url?: string
+  /**
+   * Realm to authenticate
+   */
+  realm?: string
+  /**
+   * Client ID
+   */
+  clientId?: string
+  /**
    * Specifies an action to do on load. Supported values are 'login-required' or 'check-sso'.
    */
-  onLoad: onLoadT
+  onLoad?: onLoadT
   /**
    * Set an initial value for the token.
    */
@@ -255,12 +267,17 @@ export interface KeycloakType {
   onTokenExpired: () => void
 }
 
+/**
+ * Provides authentication service for the application
+ * This class wrapps a keycloak object
+ * https://keycloak.gitbooks.io/securing-client-applications-guide/content/v/2.4/topics/oidc/javascript-adapter.html
+ */
 @Injectable()
 export class AuthService {
   private initCallBack: Promise<boolean>
   keycloak: KeycloakType;
 
-  constructor(config: any) {
+  constructor(config: InitOptions) {
     this.init(config);
   }
 
