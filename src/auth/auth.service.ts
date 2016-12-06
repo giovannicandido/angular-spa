@@ -297,7 +297,7 @@ export class AuthService {
     this.keycloak.loadUserProfile().success((v) => {
       subject.next(v)
     }).error(e => {
-      subject.error(e)
+      // subject.error(e)
     })
     return subject;
   }
