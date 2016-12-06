@@ -1,4 +1,4 @@
 # Security Directives
 
-__*secIsAutheticated__ Keep the DOM if user is authenticated, remove otherwise
-__*secIsNotAuthenticated__ Keep the DOM if user is _NOT_ authenticated. Remove otherwise
+__secIsAutheticated__ Display the DOM element if user is authenticated, hide
+__secIsNotAuthenticated__ Display the DOM element if _NOT_ authenticated. Hide otherwise
