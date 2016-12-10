@@ -1,4 +1,4 @@
-# User Account
+# Authentication 
 
 Provide security authentication based on [Keycloak](http://keycloak.org) protected apps
 
@@ -13,7 +13,7 @@ app.module.ts
     import { RouterModule } from "@angular/router"
     import { AppComponent } from "./app.component"
     import { routes, routeDeclarations } from "./app.routes"
-    import { AngularSpaModule, AuthService, LoginGuard } from "angular-spa"
+    import { AuthModule, AuthService } from "angular-spa/auth"
 
     @NgModule({
     declarations: [
@@ -25,7 +25,7 @@ app.module.ts
         FormsModule,
         HttpModule,
         RouterModule,
-        AngularSpaModule,
+        AuthModule,
         routes
     ],
     providers: [
@@ -36,15 +36,14 @@ app.module.ts
             realm: 'master',
             clientId: 'con-client'
         })
-        },
-        LoginGuard
+        }
     ],
     bootstrap: [AppComponent]
     })
     export class AppModule {
     }
 
-First we import **AngularSpaModule, AuthService and LoginGuard** then we provide
+First we import **AuthModule, AuthService** then we provide
 **AuthService** with the url, realm and clientId for the keycloak auth server
 
 AuthService will check if person is on Single Single on
