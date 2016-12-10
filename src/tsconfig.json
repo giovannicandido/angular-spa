@@ -3,21 +3,14 @@
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false,
     "lib": ["es6", "dom"],
-    "module": "commonjs",
+    "module": "es6",
     "moduleResolution": "node",
-    "outDir": "dist/",
+    "outDir": "../dist/out-tsc",
     "sourceMap": false,
     "target": "es5",
     "typeRoots": [
-      "node_modules/@types"
+      "../node_modules/@types"
     ]
-  },
-  "compileOnSave": true,
-  "exclude": [
-    "node_modules/*",
-    "**/*-aot.ts",
-     "dist/"
-  ]
+  }
 }

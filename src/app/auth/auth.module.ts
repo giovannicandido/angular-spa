@@ -27,8 +27,7 @@ const declarations = [
   providers: providers,
   declarations: declarations,
   exports: [
-    ...declarations,
-    ...providers
+    ...declarations
   ]
 })
 export class AuthModule {

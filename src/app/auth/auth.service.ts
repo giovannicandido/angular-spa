@@ -274,7 +274,7 @@ export interface KeycloakType {
  */
 @Injectable()
 export class AuthService {
-  private initCallBack: Promise<boolean>
+  protected initCallBack: Promise<boolean>
   keycloak: KeycloakType
 
   constructor(config: InitOptions) {

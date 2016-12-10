@@ -3,6 +3,7 @@ import { TestBed, ComponentFixture } from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
 import { AuthModule } from './auth.module'
 import { AuthService } from './auth.service'
+import { FakeAuthService } from '../test/fake-auth.service'
 
 let fixture: ComponentFixture<AppComponent>
 let comp: AppComponent
@@ -12,9 +13,15 @@ describe("auth-module", () => {
     //   // refine the test module by declaring the test component
     TestBed.configureTestingModule({
       imports: [
-        AuthModule
+        AuthModule,
       ],
-      declarations: [AppComponent]
+      declarations: [AppComponent],
+      providers: [
+        {
+          provide: AuthService,
+          useClass: FakeAuthService
+        }
+      ]
     })
 
 
@@ -39,5 +46,5 @@ describe("auth-module", () => {
   template: '<h1>Hello</h1>'
 })
 class AppComponent {
-  constructor(public auth: AuthService){}
+  constructor(public auth: AuthService) { }
 }
