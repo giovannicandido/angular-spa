@@ -13,7 +13,7 @@ export class AppSecurityListener {
     return 'KEYCLOAK_TOKEN'
   }
 
-  constructor(private auth: AuthService,  
+  constructor(private auth: AuthService,
               private router: Router,
               private logger: Logger) {
     this.startListening()
