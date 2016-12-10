@@ -1,9 +1,8 @@
 export class Account {
     private _firstName: string
     private _lastName: string
-    private _fullName: string
     email: string
-    login: string
+    username: string
     picture: string
     website: string
     gender: string
@@ -53,13 +52,5 @@ export class Account {
 
     set lastName(lastName: string) {
         this._lastName = lastName
-    }
-
-    get fullName(): string {
-        return this._fullName.trim()
-    }
-
-    set fullName(value: string) {
-        this._fullName = value
     }
 }
