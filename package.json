@@ -17,7 +17,7 @@
     "webdriver:update": "webdriver-manager update",
     "copyfiles": "cp -rf package.json README.md LICENSE dist/out-tsc/app",
     "clean": "rm -rf dist",
-    "dist": "npm run clean && npm run build && npm run copyfiles && cd dist/out-tsc/app"
+    "dist": "npm run clean && npm run build && npm run copyfiles && cd dist/out-tsc/app && npm publish"
   },
   "repository": {
     "type": "git",
