@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { AuthService } from "./auth.service"
+import { AuthService } from "../auth.service"
 
 /**
  * A angular router guard that permit only logged in users to procced

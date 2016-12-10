@@ -1,5 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@angular/core'
-import { AuthService } from './auth.service'
+import { AuthService } from '../auth.service'
 
 function hideFromDom(element: ElementRef) {
   element.nativeElement.style.display = 'none'

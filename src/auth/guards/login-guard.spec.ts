@@ -1,5 +1,5 @@
 import { LoginGuard } from './login-guard'
-import { AuthService } from './auth.service'
+import { AuthService } from '../auth.service'
 
 describe("LoginGuard", function(){
     let authMock: any = {

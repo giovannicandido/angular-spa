@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core"
 import { Subject } from "rxjs/Subject"
 import { Observable } from "rxjs/Observable"
-import { Account } from "../account/account"
+import { Account } from "./account/account"
 
 declare let Keycloak: any
 
@@ -119,6 +119,44 @@ export interface KeycloakType {
   responseType: string
   flow: string
 
+   /**
+   * Called when a user is successfully authenticated
+   */
+  onAuthSuccess: () => void
+
+  /**
+   * Called when the adapter is initialized.
+   * @param authenticated
+   */
+  onReady: (authenticated) => void
+
+  /**
+   * Called if there was an error during authentication.
+   */
+  onAuthError: () => void
+
+  /**
+   * Called when the token is refreshed.
+   */
+  onAuthRefreshSuccess: () => void
+
+  /**
+   * Called if there was an error while trying to refresh the token.
+   */
+  onAuthRefreshError: () => void
+
+  /**
+   * Called if the user is logged out (will only be called if the session status iframe is enabled, or in Cordova mode).
+   */
+  onAuthLogout: () => void
+
+  /**
+   * Called when the access token is expired. If a refresh token is available the token can be refreshed with
+   * updateToken, or in cases where it’s not (ie. with implicit flow) you can redirect to login screen to obtain a
+   * new access token.
+   */
+  onTokenExpired: () => void
+
   /**
    * Called to initialize the adapter.
    * @param options
@@ -227,44 +265,6 @@ export interface KeycloakType {
    * Invoking this results in onAuthLogout callback listener being invoked.
    */
   clearToken()
-
-  /**
-   * Called when a user is successfully authenticated
-   */
-  onAuthSuccess: () => void
-
-  /**
-   * Called when the adapter is initialized.
-   * @param authenticated
-   */
-  onReady: (authenticated) => void
-
-  /**
-   * Called if there was an error during authentication.
-   */
-  onAuthError: () => void
-
-  /**
-   * Called when the token is refreshed.
-   */
-  onAuthRefreshSuccess: () => void
-
-  /**
-   * Called if there was an error while trying to refresh the token.
-   */
-  onAuthRefreshError: () => void
-
-  /**
-   * Called if the user is logged out (will only be called if the session status iframe is enabled, or in Cordova mode).
-   */
-  onAuthLogout: () => void
-
-  /**
-   * Called when the access token is expired. If a refresh token is available the token can be refreshed with
-   * updateToken, or in cases where it’s not (ie. with implicit flow) you can redirect to login screen to obtain a
-   * new access token.
-   */
-  onTokenExpired: () => void
 }
 
 /**
@@ -275,15 +275,15 @@ export interface KeycloakType {
 @Injectable()
 export class AuthService {
   private initCallBack: Promise<boolean>
-  keycloak: KeycloakType;
+  keycloak: KeycloakType
 
   constructor(config: InitOptions) {
-    this.init(config);
+    this.init(config)
   }
 
   init(config: any): Promise<boolean> {
     if (this.keycloak == null) {
-      this.keycloak = new Keycloak(config);
+      this.keycloak = new Keycloak(config)
     }
     this.initCallBack = new Promise((resolve) => {
       this.keycloak.init({onLoad: 'check-sso'})
@@ -297,7 +297,7 @@ export class AuthService {
   }
 
   isUserLoggedIn(): Promise<boolean> {
-    return this.initCallBack;
+    return this.initCallBack
   }
 
   login() {
@@ -305,7 +305,7 @@ export class AuthService {
   }
 
   logout() {
-    console.log('*** LOGOUT');
+    console.log('*** LOGOUT')
     this.keycloak.logout()
   }
 
@@ -316,6 +316,6 @@ export class AuthService {
     }).error(e => {
       // subject.error(e)
     })
-    return subject;
+    return subject
   }
 }
