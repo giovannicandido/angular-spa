@@ -1,43 +1,30 @@
+import { fakeAsync, tick } from "@angular/core/testing"
+
 import { LoginGuard } from './login-guard'
-import { AuthService } from '../auth.service'
+import { FakeAuthService } from '../../test/fake-auth.service'
 
-describe("LoginGuard", function(){
-    let authMock: any = {
-            isUserLoggedIn: function(){
+describe("LoginGuard", function () {
+    let authMock = new FakeAuthService()
 
-            },
-            login: function(){
-
-            }
-        }
-        
-    it("should call loggin when user is not logged", (done) => {
-        spyOn(authMock, 'isUserLoggedIn').and.callFake(function(){
-            return {
-                then: function(callback) {return callback(false)}
-            }
-        })
+    it("should call loggin when user is not logged", fakeAsync(() => {
+        authMock.authenticated = false
+        let guard = new LoginGuard(<any>authMock)
         spyOn(authMock, 'login')
-        let guard = new LoginGuard(authMock)
-        guard.canActivate().then(function(r){
+        guard.canActivate().then(function (r) {
             expect(r).toBeFalsy()
-            expect(authMock.login).toHaveBeenCalled()
-            done()
-        })       
-    })
-
-    it("should return promise true if user logged in", (done) => {
-        spyOn(authMock, 'login')
-        spyOn(authMock, 'isUserLoggedIn').and.callFake(function(){
-            return {
-                then: function(callback) {return callback(true)}
-            }
         })
-        let guard = new LoginGuard(authMock)
-        guard.canActivate().then(function(r){
+        tick(1)
+        expect(authMock.login).toHaveBeenCalled()
+    }))
+
+    it("should return promise true if user logged in", fakeAsync(() => {
+        authMock.authenticated = true
+        spyOn(authMock, 'login')
+        let guard = new LoginGuard(<any>authMock)
+        guard.canActivate().then(function (r) {
             expect(r).toBeTruthy()
-            expect(authMock.login).not.toHaveBeenCalled()
-            done()
-        })       
-    })
+        })
+        tick(1)
+        expect(authMock.login).not.toHaveBeenCalled()
+    }))
 })
