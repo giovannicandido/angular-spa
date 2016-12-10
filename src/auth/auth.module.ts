@@ -3,10 +3,10 @@ import { HttpModule } from "@angular/http"
 import { InterceptorModule } from "angular-http-interceptor"
 
 import { AuthService } from './auth.service'
-import { SecIsAuthenticated, SecIsNotAuthenticated } from "./directives"
-import { LoginGuard } from './guards'
-import { RefreshTokenHttpInterceptor } from './interceptors'
-import { AppSecurityListener } from './listeners'
+import { SecIsAuthenticated, SecIsNotAuthenticated } from "./directives/"
+import { LoginGuard } from './guards/'
+import { RefreshTokenHttpInterceptor } from './interceptors/'
+import { AppSecurityListener } from './listeners/'
 
 const providers = [
   AuthService,

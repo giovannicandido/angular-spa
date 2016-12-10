@@ -26,15 +26,20 @@
 
       // other libraries
       'rxjs':                      'npm:rxjs',
-      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
+      'angular-http-interceptor': 'npm:angular-http-interceptor'
   },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
       dist: {
-        main: './main.js',
+        main: './index.js',
         defaultExtension: 'js'
       },
       rxjs: {
+        defaultExtension: 'js'
+      },
+      "angular-http-interceptor": {
+        main: './index.js',
         defaultExtension: 'js'
       }
     }

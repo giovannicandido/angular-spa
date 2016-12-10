@@ -54,6 +54,9 @@ module.exports = function(config) {
       { pattern: 'systemjs.config.extras.js', included: false, watched: false },
       'karma-test-shim.js',
 
+      { pattern: 'node_modules/angular-http-interceptor/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/angular-http-interceptor/**/*.js.map', included: false, watched: false },
+      
       // transpiled application & spec code paths loaded via module imports
       { pattern: appBase + '**/*.js', included: false, watched: true },
 
