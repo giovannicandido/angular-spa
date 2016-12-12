@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core"
 import { HttpModule } from "@angular/http"
-import { InterceptorModule } from "angular-http-interceptor"
+import { InterceptorModule, Interceptor } from "angular-http-interceptor"
 
 import { SecIsAuthenticated, SecIsNotAuthenticated } from "./directives/"
 import { LoginGuard } from './guards/'
@@ -10,7 +10,10 @@ import { LoggerModule } from '../logger'
 
 const providers = [
   LoginGuard,
-  RefreshTokenHttpInterceptor,
+  {
+    provide: Interceptor,
+    useClass: RefreshTokenHttpInterceptor
+  },
   AppSecurityListener
 ]
 const declarations = [
