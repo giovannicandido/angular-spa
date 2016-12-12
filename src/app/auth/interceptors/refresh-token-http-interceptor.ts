@@ -12,10 +12,12 @@ import 'rxjs/add/observable/fromPromise'
 @Injectable()
 export class RefreshTokenHttpInterceptor implements Interceptor {
 
-  before(request: string | Request): Observable<any> {
+  before(request: Request): Observable<any> {
     let promise = new Promise((resolve, reject) => {
-      this.auth.keycloak.updateToken(30).success(fn => {
-        this.logger.info("updated token")
+      this.auth.keycloak.updateToken(30).success(result => {
+        this.logger.log("updated token")
+        let token = this.auth.keycloak.token
+        request.headers.set("Authorization", `Bearer ${token}`)
         resolve(request)
       }).error(error => {
         reject(error)
