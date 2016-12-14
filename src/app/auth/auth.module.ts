@@ -12,7 +12,8 @@ const providers = [
   LoginGuard,
   {
     provide: Interceptor,
-    useClass: RefreshTokenHttpInterceptor
+    useClass: RefreshTokenHttpInterceptor,
+    multi: true
   },
   AppSecurityListener
 ]
@@ -25,7 +26,7 @@ const declarations = [
   imports: [
     HttpModule,
     LoggerModule,
-    InterceptorModule.withInterceptors([RefreshTokenHttpInterceptor])
+    InterceptorModule
   ],
   providers: providers,
   declarations: declarations,
