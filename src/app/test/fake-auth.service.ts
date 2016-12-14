@@ -1,12 +1,13 @@
-import { KeycloakType } from '../auth/auth.service'
+import { KeycloakType, AuthService, KeycloakPromise } from '../auth/auth.service'
 import { Observable } from 'rxjs/Observable'
+import "rxjs/add/operator/mergeMap"
 import { Account } from '../auth/account/account'
 
 import 'rxjs/add/observable/of'
 
-class FakeKeycloak {
+export class FakeKeycloak {
   token: "fake"
-
+  constructor(public account: Account) {}
   init() {
 
   }
@@ -40,13 +41,24 @@ class FakeKeycloak {
   updateToken(delay?: number) {
   }
 
+  /**
+   * to spyOn
+   */
+  loadUserProfile(): KeycloakPromise {
+      return null
+  }
+
 }
 
-export class FakeAuthService {
+export class FakeAuthService extends AuthService {
     authenticated: boolean = false
     account: Account = new Account()
     initCallBack: Promise<boolean>
-    keycloak: KeycloakType = <any>new FakeKeycloak()
+    keycloak: KeycloakType = <any>new FakeKeycloak(this.account)
+
+    constructor() {
+        super(null)
+    }
 
     init(config: any): Promise<boolean> {
         return Promise.resolve(true)
@@ -62,9 +74,5 @@ export class FakeAuthService {
 
     logout() {
         this.authenticated = false
-    }
-
-    getLoginAccount(): Observable<Account> {
-        return Observable.of(this.account)
     }
 }

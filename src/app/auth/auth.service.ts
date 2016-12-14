@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from "@angular/core"
+import { Injectable, Optional } from "@angular/core"
 import { Account } from "./account/account"
 
 import { Observable } from "rxjs/Observable"
@@ -286,7 +286,6 @@ export interface KeycloakType {
 export class AuthService {
   protected initCallBack: Promise<boolean> = Promise.resolve(false)
   keycloak: KeycloakType
-
   constructor(config: InitOptions) {
     this.init(config)
   }
