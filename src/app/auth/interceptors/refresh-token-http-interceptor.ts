@@ -13,9 +13,9 @@ import 'rxjs/add/observable/fromPromise'
 export class RefreshTokenHttpInterceptor implements Interceptor {
 
   before(request: Request): Observable<any> {
+    this.logger.log("RefreshTokenHttpInterceptor before interceptor")
     let promise = new Promise((resolve, reject) => {
       this.auth.keycloak.updateToken(30).success(result => {
-        this.logger.log("updated token")
         let token = this.auth.keycloak.token
         request.headers.set("Authorization", `Bearer ${token}`)
         resolve(request)
@@ -33,7 +33,6 @@ export class RefreshTokenHttpInterceptor implements Interceptor {
   error(err: any): void {
   }
   constructor(private auth: AuthService, private logger: Logger) {
-
+    logger.log("RefreshTokenHttpInterceptor activated")
   }
-
 }
