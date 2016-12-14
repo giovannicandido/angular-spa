@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
-import { HttpModule } from '@angular/http'
+import { HttpModule, Request, RequestOptions, Headers } from '@angular/http'
 import { Router } from '@angular/router'
-import { TestBed, ComponentFixture } from '@angular/core/testing'
+import { TestBed, ComponentFixture, inject, fakeAsync, tick } from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
 import { AuthModule } from '../auth.module'
 import { AuthService } from '../auth.service'
@@ -24,7 +24,7 @@ describe("refresh-token-http-interceptor", () => {
         {
           provide: AuthService,
           useClass: FakeAuthService
-        }
+        }, RefreshTokenHttpInterceptor
       ]
     })
 
@@ -43,6 +43,24 @@ describe("refresh-token-http-interceptor", () => {
     expect(element.textContent).toContain('Hello')
     expect(comp.interceptor).not.toBeNull()
   })
+
+  it('should resolve even if cant refresh token', fakeAsync(
+    inject([RefreshTokenHttpInterceptor, AuthService], (refreshToken: RefreshTokenHttpInterceptor, auth: AuthService) => {
+      let request = new Request(new RequestOptions())
+      let requestReturned;
+      let fakePromise = (fn: () => any) => {
+        // fn()
+        return {error: (fn) => {
+          fn()
+        }}
+      }
+      spyOn(auth.keycloak, 'updateToken').and.returnValue({success: fakePromise})
+      let promise = refreshToken.before(request)
+      promise.subscribe(e => requestReturned = e)
+      tick(10)
+      expect(requestReturned).toEqual(request)
+    })))
+
 })
 
 @Component({

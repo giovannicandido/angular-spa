@@ -20,7 +20,8 @@ export class RefreshTokenHttpInterceptor implements Interceptor {
         request.headers.set("Authorization", `Bearer ${token}`)
         resolve(request)
       }).error(error => {
-        reject(error)
+        this.logger.info("Can't refresh token: " + error)
+        resolve(request)
       })
     })
 

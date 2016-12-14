@@ -1,10 +1,12 @@
-import { AuthService, KeycloakType } from '../auth/auth.service'
+import { KeycloakType } from '../auth/auth.service'
 import { Observable } from 'rxjs/Observable'
 import { Account } from '../auth/account/account'
 
 import 'rxjs/add/observable/of'
 
 class FakeKeycloak {
+  token: "fake"
+
   init() {
 
   }
@@ -34,6 +36,9 @@ class FakeKeycloak {
    * new access token.
    */
   onTokenExpired: () => void
+
+  updateToken(delay?: number) {
+  }
 
 }
 
