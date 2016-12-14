@@ -19,6 +19,7 @@ describe("app-security-listener", () => {
   beforeEach(() => {
     //   // refine the test module by declaring the test component
     spyOn(fakeRouter, 'navigateByUrl')
+    spyOn(fakeAuthService, 'logout')
     TestBed.configureTestingModule({
       imports: [
         HttpModule,
@@ -56,6 +57,7 @@ describe("app-security-listener", () => {
     expect(fakeAuthService.keycloak.onAuthLogout).not.toBeNull()
     fakeAuthService.keycloak.onAuthLogout()
     expect(fakeRouter.navigateByUrl).toHaveBeenCalled()
+    expect(fakeAuthService.logout).toHaveBeenCalled()
   }))
 })
 

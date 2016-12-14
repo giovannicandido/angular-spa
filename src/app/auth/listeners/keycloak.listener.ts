@@ -31,6 +31,7 @@ export class AppSecurityListener {
     this.auth.keycloak.onAuthLogout = () => {
       this.logger.info("*** Logged out in another page")
       this.router.navigateByUrl('/')
+      this.auth.logout()
     }
     this.auth.keycloak.onTokenExpired = () => {
       this.logger.info("Token expired")
