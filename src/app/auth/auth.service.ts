@@ -312,11 +312,14 @@ export class AuthService {
 
   getLoginAccount(): Observable<Account> {
     let subject: Subject<Account> = new Subject()
-    this.keycloak.loadUserProfile().success((v) => {
-      subject.next(v)
-    }).error(e => {
-      subject.error(e)
+    this.keycloak.updateToken(10).success(() => {
+      this.keycloak.loadUserProfile().success((v) => {
+        subject.next(v)
+      }).error(e => {
+        subject.error(e)
+      })
     })
+
     return subject
   }
 }
