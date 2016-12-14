@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core"
+import { Injectable, NgZone } from "@angular/core"
 import { Subject } from "rxjs/Subject"
 import { Observable } from "rxjs/Observable"
 import { Account } from "./account/account"
@@ -13,7 +13,8 @@ export interface KeycloakPromise {
   error(fn: (error: any) => void): KeycloakPromise
 }
 
-export interface InitOptions {
+@Injectable()
+export abstract class InitOptions {
   /**
    * URL for the keycloak server
    */
@@ -119,9 +120,9 @@ export interface KeycloakType {
   responseType: string
   flow: string
 
-   /**
-   * Called when a user is successfully authenticated
-   */
+  /**
+  * Called when a user is successfully authenticated
+  */
   onAuthSuccess: () => void
 
   /**
@@ -274,7 +275,7 @@ export interface KeycloakType {
  */
 @Injectable()
 export class AuthService {
-  protected initCallBack: Promise<boolean>
+  protected initCallBack: Promise<boolean> = Promise.resolve(false)
   keycloak: KeycloakType
 
   constructor(config: InitOptions) {
@@ -286,11 +287,11 @@ export class AuthService {
       this.keycloak = new Keycloak(config)
     }
     this.initCallBack = new Promise((resolve) => {
-      this.keycloak.init({onLoad: 'check-sso'})
+      this.keycloak.init(config)
         .success((value) => {
           resolve(value)
         }).error(() => {
-        resolve(false)
+          resolve(false)
         })
     })
     return this.initCallBack
@@ -314,7 +315,7 @@ export class AuthService {
     this.keycloak.loadUserProfile().success((v) => {
       subject.next(v)
     }).error(e => {
-      // subject.error(e)
+      subject.error(e)
     })
     return subject
   }
