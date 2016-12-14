@@ -1,16 +1,25 @@
 import { Injectable, NgZone } from "@angular/core"
-import { Subject } from "rxjs/Subject"
-import { Observable } from "rxjs/Observable"
 import { Account } from "./account/account"
+
+import { Observable } from "rxjs/Observable"
+import "rxjs/add/operator/mergeMap"
 
 declare let Keycloak: any
 
 export type onLoadT = 'login-required' | 'check-sso'
 export type responseModeT = 'query' | 'fragment'
 export type flowT = 'standard' | 'implicit' | 'hybrid'
+
 export interface KeycloakPromise {
   success(fn: (value: any) => void): KeycloakPromise
   error(fn: (error: any) => void): KeycloakPromise
+}
+
+export function keycloakPromiseToPromise(keycloakPromise: KeycloakPromise): Promise<any> {
+  return new Promise((resolve, reject) => {
+    keycloakPromise.success((value) => resolve(value))
+      .error(e => reject(e))
+  })
 }
 
 @Injectable()
@@ -310,16 +319,11 @@ export class AuthService {
     this.keycloak.logout()
   }
 
-  getLoginAccount(): Observable<Account> {
-    let subject: Subject<Account> = new Subject()
-    this.keycloak.updateToken(10).success(() => {
-      this.keycloak.loadUserProfile().success((v) => {
-        subject.next(v)
-      }).error(e => {
-        subject.error(e)
-      })
-    })
+  updateToken(minValue?: number): Observable<any> {
+    return Observable.fromPromise(keycloakPromiseToPromise(this.keycloak.updateToken(minValue)))
+  }
 
-    return subject
+  getLoginAccount(): Observable<Account> {
+    return this.updateToken(10).flatMap(_ => Observable.fromPromise(keycloakPromiseToPromise(this.keycloak.loadUserProfile())))
   }
 }
