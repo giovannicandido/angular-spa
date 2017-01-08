@@ -1,0 +1,41 @@
+{
+  "name": "angular-spa",
+  "version": "0.3.4",
+  "description": "Utilities for angular 2 applications backed by generator-spring-spa project",
+  "main": "bundles/angular-spa.umd.js",
+  "module": "index.js",
+  "typings": "index.d.ts",
+  "keywords": [
+    "angular",
+    "angular2",
+    "angular 2",
+    "ng2",
+    "utils",
+    "ui",
+    "keycloak",
+    "security"
+  ],
+  "author": "Giovanni Silva",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atende/angular-spa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/atende/angular-spa/issues"
+  },
+  "homepage": "https://github.com/atende/angular-spa#readme",
+  "peerDependencies": {
+    "@angular/common": ">=2.0.0 <=3.0.0",
+    "@angular/core": ">=2.0.0 <=3.0.0",
+    "@angular/http": ">=2.0.0 <=3.0.0",
+    "@angular/router": ">=3.0.0 <=4.0.0",
+    "core-js": "^2.4.1",
+    "rxjs": ">=5.0.0-beta.12 <= 5.0.0-rc.4",
+    "zone.js": ">=0.6.26 < 2.0.0"
+  },
+  "dependencies": {
+    "keycloak-js": "^2.4.0",
+    "angular-http-interceptor": "^0.2.4"
+  }
+}

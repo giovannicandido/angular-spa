@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "stripInternal": true,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2015","dom"],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "outDir": "dist/",
+    "sourceMap": true,
+    "inlineSources": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@angular/core": ["node_modules/@angular/core"],
+      "@angular/common": ["node_modules/@angular/common"],
+      "@angular/http": ["node_modules/@angular/http"],
+      "@angular/router": ["node_modules/@angular/router"],
+      "angular-http-interceptor/*": ["node_modules/angular-http-interceptor/*"],
+      "core-js/*": ["node_modules/core-js/*"],
+      "keycloak-js": ["node_modules/keycloak-js"],
+      "rxjs/*": ["node_modules/rxjs/*"]
+    }
+  },
+  "exclude": [
+    "node_modules/*",
+    "dist/",
+    "**/*-aot.ts"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true
+  }
+}

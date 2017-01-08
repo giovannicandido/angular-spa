@@ -2,11 +2,11 @@ import { NgModule } from "@angular/core"
 import { HttpModule } from "@angular/http"
 import { InterceptorModule, Interceptor } from "angular-http-interceptor"
 
-import { SecIsAuthenticated, SecIsNotAuthenticated } from "./directives/"
-import { LoginGuard } from './guards/'
-import { RefreshTokenHttpInterceptor } from './interceptors/'
-import { AppSecurityListener } from './listeners/'
-import { LoggerModule } from '../logger'
+import { SecIsAuthenticated, SecIsNotAuthenticated } from "./directives/index"
+import { LoginGuard } from './guards/index'
+import { RefreshTokenHttpInterceptor } from './interceptors/index'
+import { AppSecurityListener } from './listeners/index'
+import { LoggerModule } from '../logger/index'
 import {AuthService} from "./auth.service"
 
 const providers = [
