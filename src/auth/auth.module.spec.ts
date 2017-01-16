@@ -26,10 +26,10 @@ describe("auth-module", () => {
 
 
     //   // create component and test fixture
-    fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(AppComponent)
 
     //   // get test component from the fixture
-    comp = fixture.componentInstance;
+    comp = fixture.componentInstance
   })
 
   it('should inject', () => {

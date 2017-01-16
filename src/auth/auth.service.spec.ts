@@ -1,6 +1,6 @@
 import {fakeAsync, tick} from "@angular/core/testing"
-import {keycloakPromiseToPromise, KeycloakPromise, AuthService} from "./auth.service"
-import {FakeKeycloak, FakeAuthService} from "../test/fake-auth.service"
+import {keycloakPromiseToPromise, KeycloakPromise} from "./auth.service"
+import {FakeAuthService} from "../test/fake-auth.service"
 
 describe("auth.service", () => {
     it("should convert keycloakPromise to oficial promise", fakeAsync(() => {

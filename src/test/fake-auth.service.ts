@@ -1,5 +1,4 @@
 import { KeycloakType, AuthService, KeycloakPromise } from '../auth/auth.service'
-import { Observable } from 'rxjs/Observable'
 import "rxjs/add/operator/mergeMap"
 import { Account } from '../auth/account/account'
 
@@ -14,11 +13,12 @@ export class FakeKeycloak {
   /**
    * Called if there was an error during authentication.
    */
+  // tslint:disable-next-line:member-ordering
   onAuthError: () => void
-
   /**
    * Called when the token is refreshed.
    */
+  // tslint:disable-next-line:member-ordering
   onAuthRefreshSuccess: () => void
 
   /**
