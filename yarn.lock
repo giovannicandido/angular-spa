@@ -271,16 +271,9 @@ angular-cli@1.0.0-beta.19-3:
     webpack-merge "^0.14.0"
     zone.js "^0.6.23"
 
-angular-http-interceptor@^0.2.3:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/angular-http-interceptor/-/angular-http-interceptor-0.2.5.tgz#02527730babb66cf5d48fedd283d64ff6e091a8f"
-  dependencies:
-    "@angular/common" ">=2.0.0 <=3.0.0"
-    "@angular/core" ">=2.0.0 <=3.0.0"
-    "@angular/http" ">=2.0.0 <=3.0.0"
-    "@angular/platform-browser" ">=2.0.0 <=3.0.0"
-    rxjs ">=5.0.0-beta.12 <= 5.0.0-rc.4"
-    zone.js ">=0.6.26 < 2.0.0"
+angular-http-interceptor@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/angular-http-interceptor/-/angular-http-interceptor-0.2.6.tgz#558080704fd573c0d04c17d64b5995a8ae5a90ac"
 
 angular2-template-loader@^0.5.0:
   version "0.5.0"
@@ -3910,6 +3903,10 @@ json5@^0.5.0:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
+json@^9.0.4:
+  version "9.0.4"
+  resolved "https://registry.yarnpkg.com/json/-/json-9.0.4.tgz#d0dbf2404c128572a935ecafadfc782ec81112ce"
+
 jsonfile@^2.0.0, jsonfile@^2.1.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-2.4.0.tgz#3736a2b428b87bbda0cc83b53fa3d633a35c2ae8"
@@ -6445,13 +6442,7 @@ rxjs@5.0.0-beta.12:
   dependencies:
     symbol-observable "^1.0.1"
 
-"rxjs@>=5.0.0-beta.12 <= 5.0.0-rc.4":
-  version "5.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.0.0-rc.4.tgz#a4d08bc5d7f30d48ed7130e2995490c326a325c4"
-  dependencies:
-    symbol-observable "^1.0.1"
-
-rxjs@^5.0.1:
+"rxjs@>=5.0.0-beta.12 < 6.0.0", rxjs@^5.0.1:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.0.3.tgz#fc8bdf464ebf938812748e4196788f392fef9754"
   dependencies:
