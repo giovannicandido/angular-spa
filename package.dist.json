@@ -1,6 +1,6 @@
 {
   "name": "angular-spa",
-  "version": "0.3.5",
+  "version": "0.3.7",
   "description": "Utilities for angular 2 applications backed by generator-spring-spa project",
   "main": "bundles/angular-spa.umd.js",
   "module": "index.js",
