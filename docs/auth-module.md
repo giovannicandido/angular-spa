@@ -30,16 +30,16 @@ Import the module
         AuthModule
     ],
     providers: [
-        {
-        provide: AuthService,
-        useValue: new AuthService(
-            {
-            url: "http://localhost:9080/auth",
-            realm: "master",
-            clientId: "teste"
-            })
-        }
-    ],
+       {
+        provide: InitOptions,
+        useValue: {
+            url: 'http://localhost:9080/auth',
+            realm: 'master',
+            clientId: 'con-client'
+         }
+        },
+        AuthService
+      ],
     bootstrap: [AppComponent]
     })
     export class AppModule { }
