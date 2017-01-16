@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "",
     "declaration": true,
     "stripInternal": true,
     "skipLibCheck": true,
@@ -28,7 +28,7 @@
     }
   },
   "exclude": [
-    "node_modules/*",
+    "node_modules",
     "dist/",
     "**/*-aot.ts"
   ],

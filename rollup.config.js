@@ -1,6 +1,11 @@
 import nodeResolve from 'rollup-plugin-node-resolve';
 export default {
   entry: 'dist/index.js',
+  plugins: [
+    nodeResolve({
+      
+    })
+  ],
   dest: 'dist/bundles/angular-spa.umd.js',
   sourceMap: false,
   format: 'umd',
@@ -23,9 +28,6 @@ export default {
     'rxjs/add/observable/fromPromise',
     'rxjs/Observable',
     'rxjs/add/operator/mergeMap'
-  ],
-  plugins: [
-    nodeResolve()
   ],
   globals: {
     '@angular/core': 'ng.core',
