@@ -1,13 +1,6 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@angular/core'
 import { AuthService } from '../auth.service'
-
-function hideFromDom(element: ElementRef) {
-  element.nativeElement.style.display = 'none'
-}
-function showHidden(element: ElementRef) {
-  element.nativeElement.style.display = 'inherit'
-}
-
+import { hideFromDom, showHidden } from '../../dom/dom.service'
 /**
  * This directive is like *ngIf. 
  * The DOM is hidden only if user is authenticated

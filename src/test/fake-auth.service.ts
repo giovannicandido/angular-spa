@@ -55,7 +55,8 @@ export class FakeAuthService extends AuthService {
     account: Account = new Account()
     initCallBack: Promise<boolean>
     keycloak: KeycloakType = <any>new FakeKeycloak(this.account)
-
+    roles = ['ROLE_ADMIN']
+    resource = 'client-id'
     constructor() {
         super(null)
     }
@@ -75,4 +76,14 @@ export class FakeAuthService extends AuthService {
     logout() {
         this.authenticated = false
     }
+
+    hasRole(role: string, resource?: string) {
+        let isRole = this.roles.indexOf(role) !== -1
+        if (!resource) {
+            return isRole
+        }else {
+            return (isRole && this.resource === resource)
+        }
+    }
+
 }

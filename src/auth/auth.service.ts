@@ -325,4 +325,13 @@ export class AuthService {
   getLoginAccount(): Observable<Account> {
     return this.updateToken(10).flatMap(_ => Observable.fromPromise(keycloakPromiseToPromise(this.keycloak.loadUserProfile())))
   }
+
+  hasRole(role: string, resource?: string) {
+    if (resource) {
+      return this.keycloak.hasResourceRole(role, resource)
+    }else {
+      return this.keycloak.hasRealmRole(role)
+    }
+  }
+
 }

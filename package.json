@@ -9,9 +9,9 @@
     "lint": "tslint ./src/**/*.ts -t verbose",
     "lint:fix": "tslint ./src/**/*.ts --fix",
     "test": "karma start ./karma/karma.conf.js",
-    "test-once": "karma start ./karma/karma.conf.js --singleRun=true",
+    "test:ci": "karma start ./karma/karma.conf.js --singleRun=true",
     "test:headless": "karma start ./karma/karma.conf.js --browsers PhantomJS --autoWatch=true --singleRun=false",
-    "test:single": "karma start ./karma/karma.conf.js --browsers PhantomJS",
+    "test:single": "karma start ./karma/karma.conf.js --browsers PhantomJS --singleRun=true",
     "compile": "ngc",
     "watch": "ngc --watch",
     "pree2e": "npm run webdriver:update",
@@ -52,7 +52,7 @@
     "core-js": "^2.4.1",
     "keycloak-js": "^2.4.0",
     "rxjs": ">=5.0.0-beta.12 < 6.0.0",
-    "zone.js": ">=0.6.26 < 2.0.0"
+    "zone.js": "^0.8.10"
   },
   "devDependencies": {
     "@angular/compiler": "^2.4.2",
