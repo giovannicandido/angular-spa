@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core"
 import { Account } from "./account/account"
 
 import { Observable } from "rxjs/Observable"
+import { Subject } from "rxjs/Subject"
 import "rxjs/add/operator/mergeMap"
 
 declare let Keycloak: any
@@ -286,8 +287,35 @@ export interface KeycloakType {
 export class AuthService {
   protected initCallBack: Promise<boolean> = Promise.resolve(false)
   keycloak: KeycloakType
+
+  private _onReady: Subject<boolean>
+  private _onAuthSuccess: Subject<void>
+  private _onAuthError: Subject<void>
+  private _onAuthRefreshError: Subject<void>
+  private _onAuthLogout: Subject<void>
+  private _onTokenExpired: Subject<void>
+
+  get onReady(): Observable<boolean> {
+    return this._onReady.asObservable()
+  }
+
   constructor(config: InitOptions) {
+    this._onReady = new Subject()
+    this._onAuthSuccess = new Subject<void>()
+    this._onAuthError = new Subject<void>()
+    this._onAuthRefreshError = new Subject<void>()
+    this._onAuthLogout = new Subject<void>()
+    this._onTokenExpired = new Subject<void>()
     this.init(config)
+  }
+
+  private initEvents() {
+    this.keycloak.onReady = (authenticated) => this._onReady.next(authenticated)
+    this.keycloak.onAuthSuccess = () => this._onAuthSuccess.next()
+    this.keycloak.onAuthError = () => this._onAuthError.next()
+    this.keycloak.onAuthRefreshError = () => this._onAuthRefreshError.next()
+    this.keycloak.onAuthLogout = () => this._onAuthLogout.next()
+    this.keycloak.onTokenExpired = () => this._onTokenExpired.next()
   }
 
   init(config: any): Promise<boolean> {
@@ -309,17 +337,52 @@ export class AuthService {
     return this.initCallBack
   }
 
-  login() {
+  login(options?: LoginOptions) {
     this.keycloak.login()
   }
 
-  logout() {
-    console.log('*** LOGOUT')
-    this.keycloak.logout()
+  createLoginUrl(options?: LoginOptions) {
+    return this.keycloak.createLoginUrl(options)
   }
 
-  updateToken(minValue?: number): Observable<any> {
-    return Observable.fromPromise(keycloakPromiseToPromise(this.keycloak.updateToken(minValue)))
+  logout(options?: LogoutOptions) {
+    this.keycloak.logout(options)
+  }
+
+  createLogoutUrl(options?: LogoutOptions) {
+    return this.keycloak.createLogoutUrl(options)
+  }
+
+  register(options?: LoginOptions) {
+    this.keycloak.register(options)
+  }
+
+  createRegisterUrl(options?: LoginOptions) {
+    return this.keycloak.createRegisterUrl(options)
+  }
+
+  accountManagement() {
+    this.keycloak.accountManagement()
+  }
+
+  createAccountManagementUrl() {
+    return this.keycloak.createAccountUrl()
+  }
+
+  loadUserProfile(): Observable<Account> {
+    return this.getLoginAccount()
+  }
+
+  isTokenExpired(minValidity?: number): boolean {
+    return this.keycloak.isTokenExpired(minValidity)
+  }
+
+  updateToken(minValidity?: number): Observable<any> {
+    return Observable.fromPromise(keycloakPromiseToPromise(this.keycloak.updateToken(minValidity)))
+  }
+
+  clearToken() {
+    this.keycloak.clearToken()
   }
 
   getLoginAccount(): Observable<Account> {
@@ -329,7 +392,7 @@ export class AuthService {
   hasRole(role: string, resource?: string) {
     if (resource) {
       return this.keycloak.hasResourceRole(role, resource)
-    }else {
+    } else {
       return this.keycloak.hasRealmRole(role)
     }
   }
