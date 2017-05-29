@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core"
 
 /**
  * Simple logging service. Is intented to be overrided
- * Default implementation go to console, but you can use 
+ * Default implementation go to console, but you can use
  * https://www.npmjs.com/package/angular2-logger
  */
 @Injectable()

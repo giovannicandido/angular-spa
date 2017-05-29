@@ -6,10 +6,6 @@ import 'rxjs/add/observable/of'
 
 export class FakeKeycloak {
   token: "fake"
-  constructor(public account: Account) {}
-  init() {
-
-  }
   /**
    * Called if there was an error during authentication.
    */
@@ -38,6 +34,12 @@ export class FakeKeycloak {
    */
   onTokenExpired: () => void
 
+  constructor(public account: Account) {}
+
+  init() {
+
+  }
+
   updateToken(delay?: number) {
   }
 
@@ -51,7 +53,7 @@ export class FakeKeycloak {
 }
 
 export class FakeAuthService extends AuthService {
-    authenticated: boolean = false
+    authenticated = false
     account: Account = new Account()
     initCallBack: Promise<boolean>
     keycloak: KeycloakType = <any>new FakeKeycloak(this.account)

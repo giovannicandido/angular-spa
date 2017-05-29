@@ -9,9 +9,8 @@ import { AuthService } from "../auth.service"
  */
 @Injectable()
 export class AppSecurityListener {
-  public static get TOKEN_STORAGE_KEY() {
-    return 'KEYCLOAK_TOKEN'
-  }
+  
+  public static TOKEN_STORAGE_KEY = 'KEYCLOAK_TOKEN'
 
   constructor(private auth: AuthService,
               private router: Router,
