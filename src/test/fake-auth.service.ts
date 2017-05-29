@@ -8,8 +8,6 @@ export class FakeKeycloak {
 
   token: "fake"
 
-  constructor(public account: Account) {}
-
   /**
    * Called if there was an error during authentication.
    */
@@ -37,6 +35,8 @@ export class FakeKeycloak {
    * new access token.
    */
   onTokenExpired: () => void
+
+  constructor(public account: Account) {}
 
   init() {
 

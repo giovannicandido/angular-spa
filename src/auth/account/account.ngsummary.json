@@ -1,1 +1,1 @@
-{"summaries":[{"symbol":{"__symbol":0},"metadata":{"__symbolic":"class"}}],"symbols":[{"__symbol":0,"name":"Account","filePath":"/Users/giovanni/Projects/atende/angular/angular-spa/src/auth/account/account.d.ts"}]}
+{"summaries":[{"symbol":{"__symbol":0,"members":[]},"metadata":{"__symbolic":"class","members":{"isAccountInRole":[{"__symbolic":"method"}],"hasAuthority":[{"__symbolic":"method"}]}}}],"symbols":[{"__symbol":0,"name":"Account","filePath":"/home/giovanni/Projects/atende/angular-spa/src/auth/account/account.d.ts"}]}
