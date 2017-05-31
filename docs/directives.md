@@ -2,7 +2,7 @@
 
 * __secIsAutheticated__ Display the DOM element if user is authenticated, hide if not
 * __secIsNotAuthenticated__ Display the DOM element if _NOT_ authenticated, hide otherwise.
-* __hasRole__ Check if user has role, if not hide element from DOM. Parameters: *role* the role of the user *resource* the resource to checke the role. Defaults to the clientId.
+* __hasRole__ Check if user has role, if not hide element from DOM. Parameters: *role* the role of the user *resource* the resource to checke the role. Defaults to the clientId. It works only if a login is associated with the page, if not the expression will always return false. In other words pages not protected by a LoginGuard will always evaluate to false and will *NOT* display the element.
 
 The _hide_ and _show_ of elements are implemented with the **display** style attribute, 
 the DOM is still on page. In future releases this behaviour will be pluggable to remove 
