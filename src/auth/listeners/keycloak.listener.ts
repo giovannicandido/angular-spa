@@ -9,7 +9,7 @@ import { AuthService } from "../auth.service"
  */
 @Injectable()
 export class AppSecurityListener {
-  
+
   public static TOKEN_STORAGE_KEY = 'KEYCLOAK_TOKEN'
 
   constructor(private auth: AuthService,
@@ -19,22 +19,22 @@ export class AppSecurityListener {
   }
 
   startListening() {
-    this.auth.keycloak.onAuthSuccess = () => {
+    this.auth.onAuthSuccess.subscribe(() => {
       this.logger.info("User is logged in. Token will be saved")
       this.saveToken()
-    }
-    this.auth.keycloak.onAuthRefreshSuccess = () => {
+    })
+    this.auth.onAuthRefreshSuccess.subscribe(() => {
       this.logger.info("Token refreshed. Will be saved")
       this.saveToken()
-    }
-    this.auth.keycloak.onAuthLogout = () => {
+    })
+    this.auth.onAuthLogout.subscribe(() => {
       this.logger.info("*** Logged out in another page")
       this.router.navigateByUrl('/')
       this.auth.logout()
-    }
-    this.auth.keycloak.onTokenExpired = () => {
+    })
+    this.auth.onTokenExpired.subscribe(() => {
       this.logger.info("Token expired")
-    }
+    })
   }
 
   private saveToken() {

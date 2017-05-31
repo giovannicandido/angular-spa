@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core"
+import { Injectable, InjectionToken, Inject, Optional } from "@angular/core"
 import { Account } from "./account/account"
 
 import { Observable } from "rxjs/Observable"
@@ -10,6 +10,7 @@ declare let Keycloak: any
 export type onLoadT = 'login-required' | 'check-sso'
 export type responseModeT = 'query' | 'fragment'
 export type flowT = 'standard' | 'implicit' | 'hybrid'
+export let KEYCLOAK_TYPE = new InjectionToken<KeycloakType>('keycloak.type')
 
 export interface KeycloakPromise {
   success(fn: (value: any) => void): KeycloakPromise
@@ -292,6 +293,7 @@ export class AuthService {
   private _onAuthSuccess: Subject<void>
   private _onAuthError: Subject<void>
   private _onAuthRefreshError: Subject<void>
+  private _onAuthRefreshSuccess: Subject<void>
   private _onAuthLogout: Subject<void>
   private _onTokenExpired: Subject<void>
 
@@ -299,14 +301,45 @@ export class AuthService {
     return this._onReady.asObservable()
   }
 
-  constructor(config: InitOptions) {
+  get onAuthSuccess(): Observable<void> {
+    return this._onAuthSuccess.asObservable()
+  }
+
+  get onAuthError(): Observable<void> {
+    return this._onAuthError.asObservable()
+  }
+
+  get onAuthRefreshError(): Observable<void> {
+    return this._onAuthRefreshError.asObservable()
+  }
+
+  get onAuthRefreshSuccess(): Observable<void> {
+    return this._onAuthRefreshSuccess.asObservable()
+  }
+
+  get onAuthLogout(): Observable<void> {
+    return this._onAuthLogout.asObservable()
+  }
+
+  get onTokenExpired(): Observable<void> {
+    return this._onTokenExpired.asObservable()
+  }
+
+  constructor(config: InitOptions, @Inject(KEYCLOAK_TYPE) @Optional() keycloak?: KeycloakType) {
+    if (!keycloak) {
+      this.keycloak = new Keycloak(config)
+    }else {
+      this.keycloak = keycloak
+    }
     this._onReady = new Subject()
     this._onAuthSuccess = new Subject<void>()
     this._onAuthError = new Subject<void>()
     this._onAuthRefreshError = new Subject<void>()
+    this._onAuthRefreshSuccess = new Subject<void>()
     this._onAuthLogout = new Subject<void>()
     this._onTokenExpired = new Subject<void>()
     this.init(config)
+    this.initEvents()
   }
 
   private initEvents() {
@@ -314,14 +347,12 @@ export class AuthService {
     this.keycloak.onAuthSuccess = () => this._onAuthSuccess.next()
     this.keycloak.onAuthError = () => this._onAuthError.next()
     this.keycloak.onAuthRefreshError = () => this._onAuthRefreshError.next()
+    this.keycloak.onAuthRefreshSuccess = () => this._onAuthRefreshSuccess.next()
     this.keycloak.onAuthLogout = () => this._onAuthLogout.next()
     this.keycloak.onTokenExpired = () => this._onTokenExpired.next()
   }
 
   init(config: any): Promise<boolean> {
-    if (this.keycloak == null) {
-      this.keycloak = new Keycloak(config)
-    }
     this.initCallBack = new Promise((resolve) => {
       this.keycloak.init(config)
         .success((value) => {

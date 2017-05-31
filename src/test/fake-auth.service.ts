@@ -8,6 +8,7 @@ export class FakeKeycloak {
 
   token: "fake"
 
+  onReady: () => void
   /**
    * Called if there was an error during authentication.
    */
@@ -55,14 +56,19 @@ export class FakeKeycloak {
 }
 
 export class FakeAuthService extends AuthService {
-    authenticated = false
-    account: Account = new Account()
+    authenticated: boolean
+    account: Account
     initCallBack: Promise<boolean>
-    keycloak: KeycloakType = <any>new FakeKeycloak(this.account)
-    roles = ['ROLE_ADMIN']
-    resource = 'client-id'
+    keycloak: KeycloakType
+    roles: string[]
+    resource: string
     constructor() {
-        super(null)
+        let account = new Account()
+        let keycloak = <any>new FakeKeycloak(account)
+        super(null, keycloak)
+        this.keycloak = keycloak
+        this.roles = ['ROLE_ADMIN']
+        this.resource = 'client-id'
     }
 
     init(config: any): Promise<boolean> {

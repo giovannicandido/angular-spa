@@ -11,6 +11,7 @@ export class HasRole {
     private element: ElementRef,
     private auth: AuthService
   ) {
+    this.applyDirective()
   }
 
   ngOnInit() {

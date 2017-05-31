@@ -2,7 +2,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@an
 import { AuthService } from '../auth.service'
 import { hideFromDom, showHidden } from '../../dom/dom.service'
 /**
- * This directive is like *ngIf. 
+ * This directive is like *ngIf.
  * The DOM is hidden only if user is authenticated
  * For the oposite use **secIsNotAuthenticated**
  */
@@ -29,7 +29,7 @@ export class SecIsAuthenticated {
 }
 
 /**
- * This directive is like *ngIf. 
+ * This directive is like *ngIf.
  * The DOM is rendered only if user is NOT authenticated
  * For the oposite use **secIsAuthenticated**
  */
@@ -39,7 +39,7 @@ export class SecIsNotAuthenticated {
   constructor(
     private element: ElementRef,
     private auth: AuthService
-  ) { 
+  ) {
     hideFromDom(element)
   }
 

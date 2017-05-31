@@ -7,6 +7,7 @@ import { AuthModule } from '../auth.module'
 import { AuthService } from '../auth.service'
 import { AppSecurityListener } from './keycloak.listener'
 import { FakeAuthService } from '../../test/fake-auth.service'
+import { Logger } from '../../logger/logger.service'
 
 let fixture: ComponentFixture<AppComponent>
 let comp: AppComponent
@@ -16,10 +17,12 @@ describe("app-security-listener", () => {
     navigateByUrl: function(url: any, extras?: any): any {}
   }
   let fakeAuthService = new FakeAuthService()
+  let fakeLogger: Logger = new Logger()
   beforeEach(() => {
     //   // refine the test module by declaring the test component
     spyOn(fakeRouter, 'navigateByUrl')
     spyOn(fakeAuthService, 'logout')
+    spyOn(fakeLogger, 'info')
     TestBed.configureTestingModule({
       imports: [
         HttpModule,
@@ -33,16 +36,19 @@ describe("app-security-listener", () => {
         }, {
           provide: Router,
           useValue: fakeRouter
+        }, {
+          provide: Logger,
+          useValue: fakeLogger
         }
       ]
     })
 
 
     //   // create component and test fixture
-    fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(AppComponent)
 
     //   // get test component from the fixture
-    comp = fixture.componentInstance;
+    comp = fixture.componentInstance
   })
 
   it('should inject', () => {
@@ -58,6 +64,21 @@ describe("app-security-listener", () => {
     fakeAuthService.keycloak.onAuthLogout()
     expect(fakeRouter.navigateByUrl).toHaveBeenCalled()
     expect(fakeAuthService.logout).toHaveBeenCalled()
+  }))
+
+  it('should logger a info when authRefresh', inject([AppSecurityListener], (security) => {
+     fakeAuthService.keycloak.onAuthRefreshSuccess()
+     expect(fakeLogger.info).toHaveBeenCalled()
+  }))
+
+  it('should logger a info when tokenExpired', inject([AppSecurityListener], (security) => {
+     fakeAuthService.keycloak.onTokenExpired()
+     expect(fakeLogger.info).toHaveBeenCalled()
+  }))
+
+  it('should logger a info when authSuccess', inject([AppSecurityListener], (security) => {
+     fakeAuthService.keycloak.onAuthSuccess()
+     expect(fakeLogger.info).toHaveBeenCalled()
   }))
 })
 
