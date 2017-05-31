@@ -70,13 +70,13 @@ describe("directives", () => {
   selector: 'test-app-component',
   template: `
     <!-- this should display -->
-    <div hasRole role="ROLE_ADMIN">Authenticated</div>
+    <div hasRole="ROLE_ADMIN">Authenticated</div>
     <!-- this should display -->
-    <div hasRole role="ROLE_ADMIN" resource="client-id">Authenticated</div>
+    <div hasRole="ROLE_ADMIN" resource="client-id">Authenticated</div>
     <!-- this should NOT display -->
-    <div hasRole role="ROLE_ADMIN" resource="other">Authenticated</div>
+    <div hasRole="ROLE_ADMIN" resource="other">Authenticated</div>
     <!-- this should NOT display -->
-    <div hasRole role="ROLE_USER" resource="client-id">Authenticated</div>
+    <div hasRole="ROLE_USER" resource="client-id">Authenticated</div>
 
   `
 })

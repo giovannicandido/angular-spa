@@ -15,7 +15,7 @@ the element of the DOM (like ngIf.)
     
 Suppose a user in role *ROLE_ADMIN* on *client-id* resource (default, in keycloak means the current application)
     
-    <div hasRole role="ROLE_ADMIN">this should display</div>
-    <div hasRole role="ROLE_ADMIN" resource="client-id">this should display</div>
-    <div hasRole role="ROLE_ADMIN" resource="other">this should NOT display</div>
-    <div hasRole role="ROLE_USER" resource="client-id">this should NOT display</div>
+    <div hasRole="ROLE_ADMIN">this should display</div>
+    <div hasRole="ROLE_ADMIN" resource="client-id">this should display</div>
+    <div hasRole="ROLE_ADMIN" resource="other">this should NOT display</div>
+    <div hasRole="ROLE_USER" resource="client-id">this should NOT display</div>

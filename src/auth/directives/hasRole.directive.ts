@@ -4,7 +4,7 @@ import { hideFromDom, showHidden } from '../../dom/dom.service'
 
 @Directive({ selector: '[hasRole]' })
 export class HasRole {
-  @Input() role: string
+  @Input('hasRole') role: string
   @Input() resource: string
 
   constructor(
