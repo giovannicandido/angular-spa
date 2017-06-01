@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser'
 import { AuthModule } from '../auth.module'
 import { AuthService } from '../auth.service'
 import { FakeAuthService } from '../../test/fake-auth.service'
-import { HasAllRoles } from './hasAllRoles.directive'
+import { HasAnyRoles } from './hasAnyRoles.directive'
 
 let fixture: ComponentFixture<AppComponent>
 let comp: AppComponent
@@ -38,15 +38,15 @@ describe("directives", () => {
     authService.resource = "client-id"
   })
 
-  describe('secHasAllRoles', () => {
-    it('should display div if user is on ALL ROLE', () => {
+  describe('secHasAnyRoles', () => {
+    it('should display div if user is on all ROLE', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
       let element = debugElement[0].nativeElement
       expect(element.style.display).not.toEqual('none')
     })
 
-    it('should display div if user is on ONE in RESOURCE', () => {
+    it('should display div if user is on ONE ROLE', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
       let element = debugElement[1].nativeElement
@@ -55,25 +55,32 @@ describe("directives", () => {
 
 
 
-    it('should hide div if user id not on ALL ROLE', () => {
+    it('should display div if user is on any roles', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
       let element = debugElement[2].nativeElement
-      expect(element.style.display).toEqual('none')
+      expect(element.style.display).not.toEqual('none')
     })
 
-    it('should hide div if resource not match', () => {
+    it('should hide if roles is not on resource', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
       let element = debugElement[3].nativeElement
       expect(element.style.display).toEqual('none')
     })
 
+    it('should hide if user is not part of any role', () => {
+      fixture.detectChanges()
+      let debugElement = fixture.debugElement.queryAll(By.css("div"))
+      let element = debugElement[4].nativeElement
+      expect(element.style.display).toEqual('none')
+    })
+
     describe("unit tests", () => {
 
-      it('should verify all roles', () => {
-        let directive = new HasAllRoles(null, authService)
-        expect(directive.hasAllRoles(authService.roles)).toBeTruthy()
+      it('should verify any roles', () => {
+        let directive = new HasAnyRoles(null, authService)
+        expect(directive.hasAnyRoles(['ROLE_ADMIN', 'ROLE_ANY'])).toBeTruthy()
       })
 
     })
@@ -86,13 +93,15 @@ describe("directives", () => {
   selector: 'test-app-component',
   template: `
     <!-- this should display -->
-    <div secHasAllRoles="ROLE_ADMIN, ROLE_PUBLIC">Authenticated</div>
+    <div secHasAnyRoles="ROLE_ADMIN, ROLE_PUBLIC">Authenticated</div>
     <!-- this should display -->
-    <div secHasAllRoles="ROLE_ADMIN">Authenticated</div>
+    <div secHasAnyRoles="ROLE_ADMIN">Authenticated</div>
+    <!-- This should Display -->
+    <div secHasAnyRoles="ROLE_ADMIN, ROLE_NONE">Authenticated</div>
     <!-- This should Not Display -->
-    <div secHasAllRoles="ROLE_ADMIN, ROLE_NONE">Authenticated</div>
-    <!-- This should Not Display -->
-    <div secHasAllRoles="ROLE_ADMIN, ROLE_PUBLIC" resource="other">Authenticated</div>
+    <div secHasAnyRoles="ROLE_ADMIN, ROLE_PUBLIC" resource="other">Authenticated</div>
+    <!-- this should not display -->
+    <div secHasAnyRoles="ROLE_FOO, ROLE_BAR">Authenticated</div>
 
   `
 })

@@ -3,9 +3,9 @@ import { AuthService } from '../auth.service'
 import { hideFromDom, showHidden } from '../../dom/dom.service'
 import { splitRoles } from './functions'
 
-@Directive({ selector: '[secHasAllRoles]' })
-export class HasAllRoles {
-    @Input('secHasAllRoles') roles: string
+@Directive({ selector: '[secHasAnyRoles]' })
+export class HasAnyRoles {
+    @Input('secHasAnyRoles') roles: string
     @Input('resource') resource: string
 
     constructor(
@@ -20,7 +20,7 @@ export class HasAllRoles {
 
     applyDirective() {
         let rolesParameter = splitRoles(this.roles)
-        let show = this.hasAllRoles(rolesParameter, this.resource)
+        let show = this.hasAnyRoles(rolesParameter, this.resource)
         if (show) {
             showHidden(this.element)
         } else {
@@ -28,12 +28,12 @@ export class HasAllRoles {
         }
     }
 
-    hasAllRoles(roles: string[], resource?: string) {
+    hasAnyRoles(roles: string[], resource?: string) {
         for (let role of roles) {
-            if (!this.auth.hasRole(role, resource)) {
-                return false
+            if (this.auth.hasRole(role, resource)) {
+                return true
             }
         }
-        return true
+        return false
     }
 }
