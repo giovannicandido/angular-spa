@@ -1,34 +1,24 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@angular/core'
 import { AuthService } from '../auth.service'
-import { hideFromDom, showHidden } from '../../dom/dom.service'
-import { splitRoles } from './functions'
+import { RoleDirective } from './interfaces'
 
 @Directive({ selector: '[secHasAllRoles]' })
-export class HasAllRoles {
+export class HasAllRoles extends RoleDirective {
     @Input('secHasAllRoles') roles: string
     @Input('resource') resource: string
 
     constructor(
-        private element: ElementRef,
-        private auth: AuthService
+        protected element: ElementRef,
+        protected auth: AuthService
     ) {
+        super()
     }
 
     ngOnInit() {
         this.applyDirective()
     }
 
-    applyDirective() {
-        let rolesParameter = splitRoles(this.roles)
-        let show = this.hasAllRoles(rolesParameter, this.resource)
-        if (show) {
-            showHidden(this.element)
-        } else {
-            hideFromDom(this.element)
-        }
-    }
-
-    hasAllRoles(roles: string[], resource?: string) {
+    roleFunction = (roles: string[], resource?: string) => {
         for (let role of roles) {
             if (!this.auth.hasRole(role, resource)) {
                 return false
