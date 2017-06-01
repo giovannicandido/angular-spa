@@ -2,9 +2,9 @@ import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@an
 import { AuthService } from '../auth.service'
 import { hideFromDom, showHidden } from '../../dom/dom.service'
 
-@Directive({ selector: '[hasRole]' })
+@Directive({ selector: '[secHasRole]' })
 export class HasRole {
-  @Input('hasRole') role: string
+  @Input('secHasRole') role: string
   @Input() resource: string
 
   constructor(
