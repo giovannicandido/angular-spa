@@ -1,5 +1,5 @@
 import { hideFromDom, showHidden } from '../../dom/dom.service'
-import { ElementRef } from '@angular/core'
+import { ElementRef, Injectable } from '@angular/core'
 
 export type RoleFunction = (roles: string[], resource: string) => boolean
 
@@ -31,4 +31,11 @@ export abstract class RoleDirective {
     splitRoles(roles: string): string[] {
         return splitRoles(roles)
     }
+}
+
+@Injectable()
+export class SecDirectiveConfig {
+    action = 'hide'
+    hideStrategy = 'display'
+    defaultClass = 'disabled'
 }

@@ -8,6 +8,7 @@ import { RefreshTokenHttpInterceptor } from './interceptors'
 import { AppSecurityListener } from './listeners'
 import { LoggerModule } from '../logger'
 import { AuthService } from "./auth.service"
+import { SecDirectiveConfig } from './directives/interfaces'
 
 const providers = [
   LoginGuard,
@@ -17,7 +18,8 @@ const providers = [
     multi: true
   },
   AppSecurityListener,
-  AuthService
+  AuthService,
+  SecDirectiveConfig
 ]
 const declarations = [
   SecIsAuthenticated,

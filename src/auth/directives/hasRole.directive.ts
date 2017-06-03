@@ -1,34 +1,30 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@angular/core'
 import { AuthService } from '../auth.service'
-import { hideFromDom, showHidden } from '../../dom/dom.service'
+import { SecDirectiveConfig, RoleDirective, RoleFunction } from './interfaces'
 
 @Directive({ selector: '[secHasRole]' })
-export class HasRole {
-  @Input('secHasRole') role: string
-  @Input() resource: string
+export class HasRole extends RoleDirective  {
+
+  @Input('secHasRole') protected roles: string
+  @Input() protected resource: string
 
   constructor(
-    private element: ElementRef,
-    private auth: AuthService
+    protected element: ElementRef,
+    private auth: AuthService,
+    private config: SecDirectiveConfig
   ) {
-    this.applyDirective()
+    super()
   }
 
+  roleFunction: RoleFunction = (role, resource) => {
+    if (this.resource) {
+      return this.auth.hasRole(role[0], resource)
+    } else {
+      return this.auth.hasRole(role[0])
+    }
+  }
+  
   ngOnInit() {
     this.applyDirective()
-  }
-
-  applyDirective() {
-    let show
-    if (this.resource) {
-      show = this.auth.hasRole(this.role, this.resource)
-    } else {
-      show = this.auth.hasRole(this.role)
-    }
-    if (show) {
-      showHidden(this.element)
-    } else {
-      hideFromDom(this.element)
-    }
   }
 }
