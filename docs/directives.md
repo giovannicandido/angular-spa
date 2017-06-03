@@ -5,7 +5,10 @@ This directives **hide** or **show** the element from the DOM based on security 
 
 * __secIsAutheticated__ 
 * __secIsNotAuthenticated__ 
-* __secHasRole__ 
+* __secHasRole__
+* __secHasAllRoles__
+* __secHasAnyRole__
+* __secHasNotRoles__
 
 **Note:** The _hide_ and _show_ of elements are implemented with the **display** style attribute, 
 the DOM is still on page. In future releases this behaviour will be pluggable to remove 
@@ -49,9 +52,46 @@ Suppose a user in role *ROLE_ADMIN* on *client-id* resource (default, in keycloa
     <div secHasRole="ROLE_ADMIN" resource="other">this should NOT display</div>
     <div secHasRole="ROLE_USER" resource="client-id">this should NOT display</div>
 
-## secHasAnyRole
+## secHasAnyRoles
 
-## secClass
+Check if user is on **Any** of the roles. Roles are separated by **,**
+
+Examples
+
+    <div secHasAnyRoles="ROLE_ADMIN, ACTION_EDIT">this should display</div>
+
+## secHasAllRoles
+
+Check if user in on **All** roles. Roles are separated by **,**
+
+Examples
+
+    <div secHasAllRoles="ACTION_UPDATE, ACTION_EDIT">this should display</div>
+
+## secHasNotRoles
+
+Check if user in **NOT** on **Any** roles. Roles are separated by **,**
+
+Examples
+
+    <div secHasNotRoles="ROLE_USER, ROLE_LIGHT_USER">this should display</div>
+
+# Configuration
+
+Any directive can be configured with the follow properties:
+
+* __action__ Action to be performed. Acepted values are: __hide__, __remove__, __addClass__
+* __hideStrategy__ How to hide elements. Accepted values are: __visibility__, __display__
+* __secClass__ CSS class to be added in the element.
+
+**Note**: _secClass_ has precedence above all, is you add this configuration at the same time using _action_, the _action_ will be ignored and assumed _addClass_.
+
+Examples
+
+    
+    <div secHasRole="ROLE_ADMIN" action="remove">this should be removed</div>
+    <div secHasRole="ROLE_ADMIN" action="hide" hideStrategy="visibility">this should not be visible</div>
+    <div secHasRole="ROLE_ADMIN" secClass="disabled">this should has class 'disabled'</div>
 
 
 
