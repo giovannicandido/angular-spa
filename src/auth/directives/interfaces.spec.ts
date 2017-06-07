@@ -9,3 +9,9 @@ describe('interfaces', () => {
     })
 
 })
+
+describe('RoleDirective', () => {
+    it('should use SecConfig to perform action', () => {
+        
+    })
+})

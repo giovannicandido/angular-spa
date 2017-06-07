@@ -1,6 +1,6 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@angular/core'
 import { AuthService } from '../auth.service'
-import { SecDirectiveConfig, RoleDirective, RoleFunction } from './interfaces'
+import { RoleDirective, RoleFunction } from './interfaces'
 
 @Directive({ selector: '[secHasRole]' })
 export class HasRole extends RoleDirective  {
@@ -11,7 +11,6 @@ export class HasRole extends RoleDirective  {
   constructor(
     protected element: ElementRef,
     private auth: AuthService,
-    private config: SecDirectiveConfig
   ) {
     super()
   }
@@ -23,7 +22,7 @@ export class HasRole extends RoleDirective  {
       return this.auth.hasRole(role[0])
     }
   }
-  
+
   ngOnInit() {
     this.applyDirective()
   }

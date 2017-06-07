@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core"
+import { NgModule, Renderer2, RendererFactory2 } from "@angular/core"
 import { HttpModule } from "@angular/http"
 import { InterceptorModule, Interceptor } from "angular-http-interceptor"
 
@@ -8,9 +8,11 @@ import { RefreshTokenHttpInterceptor } from './interceptors'
 import { AppSecurityListener } from './listeners'
 import { LoggerModule } from '../logger'
 import { AuthService } from "./auth.service"
-import { SecDirectiveConfig } from './directives/interfaces'
+import { SecDirectiveConfig, DomService } from './dom/dom.service'
 
 const providers = [
+  DomService,
+  SecDirectiveConfig,
   LoginGuard,
   {
     provide: Interceptor,
