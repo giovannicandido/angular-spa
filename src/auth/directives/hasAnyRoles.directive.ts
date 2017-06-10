@@ -1,17 +1,21 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@angular/core'
 import { AuthService } from '../auth.service'
-import { RoleDirective } from './interfaces'
+import { RoleDirective, RoleContext } from './interfaces'
+import { DomService } from '../dom/dom.service'
 
 @Directive({ selector: '[secHasAnyRoles]' })
 export class HasAnyRoles extends RoleDirective {
-    @Input('secHasAnyRoles') roles: string
-    @Input('resource') resource: string
+    @Input('secHasAnyRoles') _roles: string
+    @Input('resource') _resource: string
 
     constructor(
-        protected element: ElementRef,
-        protected auth: AuthService
+        protected element: ViewContainerRef,
+        protected domService: DomService,
+        protected auth: AuthService,
+        templateRef: TemplateRef<RoleContext>
+
     ) {
-        super()
+        super(element, domService, templateRef)
     }
 
     ngOnInit() {

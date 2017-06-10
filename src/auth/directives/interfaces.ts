@@ -1,5 +1,5 @@
-import { hideFromDom, showHidden } from '../dom/dom.service'
-import { ElementRef, Injectable } from '@angular/core'
+import { hideFromDom, showHidden, DomService } from '../dom/dom.service'
+import { ViewContainerRef, Injectable, TemplateRef } from '@angular/core'
 
 export type RoleFunction = (roles: string[], resource: string) => boolean
 
@@ -15,21 +15,26 @@ export function splitRoles(roles: string): string[] {
 
 export abstract class RoleDirective {
     abstract roleFunction: RoleFunction
-    protected abstract roles: string
-    protected abstract resource: string
-    protected abstract element: ElementRef
+    protected _context: RoleContext = new RoleContext()
+
+    constructor(protected element: ViewContainerRef, protected domService: DomService, protected _templateRef: TemplateRef<RoleContext>) {}
 
     applyDirective() {
-        let rolesParameter = this.splitRoles(this.roles)
-        if (this.roleFunction(rolesParameter, this.resource)) {
-            showHidden(this.element)
+        let rolesParameter = this.splitRoles(this._context.$roles)
+        if (this.roleFunction(rolesParameter, this._context.$resource)) {
+            this.domService.performAction(this.element, this._templateRef, this._context, true)
         } else {
-            hideFromDom(this.element)
+            this.domService.performAction(this.element, this._templateRef, this._context, false)
         }
     }
 
     splitRoles(roles: string): string[] {
         return splitRoles(roles)
     }
+}
+
+export class RoleContext {
+    public $roles
+    public $resource
 }
 

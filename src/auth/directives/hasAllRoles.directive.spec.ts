@@ -72,7 +72,7 @@ describe("directives", () => {
     describe("unit tests", () => {
 
       it('should verify all roles', () => {
-        let directive = new HasAllRoles(null, authService)
+        let directive = new HasAllRoles(null, null, authService, null)
         expect(directive.roleFunction(authService.roles)).toBeTruthy()
       })
 

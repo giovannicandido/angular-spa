@@ -1,4 +1,4 @@
-import { ElementRef, Injectable } from '@angular/core'
+import { ElementRef, ViewContainerRef, TemplateRef, Injectable } from '@angular/core'
 
 export type SecAction = 'hide' | 'remove'
 export type HideStrategy = 'display' | 'visibility'
@@ -21,21 +21,36 @@ export function showHidden(element: ElementRef) {
 export class DomService {
   constructor(private config: SecDirectiveConfig) { }
 
-  performAction(element: ElementRef, action: SecAction = this.config.action) {
+  performAction(element: ViewContainerRef, templateRef: TemplateRef<any>, context: any,
+                show: boolean, action: SecAction = this.config.action) {
     switch (action) {
       case 'hide': {
-        this.hideFromDom(element)
+        if (show) {
+          this.addToDom(element, templateRef, context)
+          this.showFromDom(element.element)
+        }else {
+          this.addToDom(element, templateRef, context)
+          this.hideFromDom(element.element)
+        }
         break
       }
       case 'remove': {
-        this.removeFromDom(element)
+        if (show) {
+          this.addToDom(element, templateRef, context)
+        }else {
+          this.removeFromDom(element)
+        }
         break
       }
     }
   }
 
-  removeFromDom(element: ElementRef) {
-    element.nativeElement.remove()
+  removeFromDom(element: ViewContainerRef) {
+    element.clear()
+  }
+
+  addToDom(element: ViewContainerRef, templateRef: TemplateRef<any>, context: any) {
+    element.createEmbeddedView(templateRef, context)
   }
 
   hideFromDom(element: ElementRef, hideStrategy: HideStrategy = this.config.hideStrategy) {
