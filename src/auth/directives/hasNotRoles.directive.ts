@@ -5,8 +5,17 @@ import { DomService } from '../dom/dom.service'
 
 @Directive({ selector: '[secHasNotRoles]' })
 export class HasNotRoles extends RoleDirective {
-    @Input('secHasNotRoles') _roles: string
-    @Input('resource') _resource: string
+
+    @Input('secHasNotRoles')
+    set hasAllRoles(roles: string) {
+        this._context.$roles = roles
+        this.applyDirective()
+    }
+    @Input('secHasNotRolesResource')
+    set resource(resource: string) {
+        this._context.$resource = resource
+        this.applyDirective()
+    }
 
     constructor(
         protected element: ViewContainerRef,
@@ -15,10 +24,6 @@ export class HasNotRoles extends RoleDirective {
         templateRef: TemplateRef<RoleContext>
     ) {
         super(element, domService, templateRef)
-    }
-
-    ngOnInit() {
-        this.applyDirective()
     }
 
     roleFunction = (roles: string[], resource?: string): boolean => {

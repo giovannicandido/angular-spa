@@ -1,9 +1,10 @@
 import { Component } from '@angular/core'
-import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing'
+import { TestBed, ComponentFixture, inject } from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
 import { AuthModule } from '../auth.module'
 import { AuthService } from '../auth.service'
 import { FakeAuthService } from '../../test/fake-auth.service'
+import { HasRole } from './hasRole.directive'
 
 let fixture: ComponentFixture<AppComponent>
 let comp: AppComponent
@@ -34,32 +35,27 @@ describe("directives", () => {
   })
 
   describe('secHasRole', () => {
-    it('should display div if user is on ROLE', () => {
+    it('should display/remove div if user is/not on ROLE', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[0].nativeElement
-      expect(element.style.display).not.toEqual('none')
+      expect(debugElement.length).toEqual(2)
+      expect(debugElement[0].nativeElement.textContent).toContain('First Div')
+      expect(debugElement[1].nativeElement.textContent).toContain('Second Div')
     })
-
-    it('should display div if user is on ROLE in RESOURCE', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[1].nativeElement
-      expect(element.style.display).not.toEqual('none')
-    })
-
-    it('should hide div if user RESOURCE has not the ROLE', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[2].nativeElement
-      expect(element.style.display).toEqual('none')
-    })
-
-    it('should hide div if user is NOT on ROLE', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[3].nativeElement
-      expect(element.style.display).toEqual('none')
+    describe('unit', () => {
+      let hasRole = new HasRole(null, null, authService, null)
+      it('should return true to ROLE_ADMIN', () => {
+        expect(hasRole.roleFunction(['ROLE_ADMIN'], undefined)).toBeTruthy()
+      })
+      it('should return true to ROLE_ADMIN and resource CLIENT-ID', () => {
+        expect(hasRole.roleFunction(['ROLE_ADMIN'],  'client-id')).toBeTruthy()
+      })
+      it('should return false to ROLE_ADMIN and resource OTHER', () => {
+        expect(hasRole.roleFunction(['ROLE_ADMIN'], 'other')).toBeFalsy()
+      })
+      it('should return false to ROLE_USER', () => {
+        expect(hasRole.roleFunction(['ROLE_USER'],  'client-id')).toBeFalsy()
+      })
     })
 
   })
@@ -70,13 +66,13 @@ describe("directives", () => {
   selector: 'test-app-component',
   template: `
     <!-- this should display -->
-    <div *secHasRole="ROLE_ADMIN">Authenticated</div>
+    <div *secHasRole="'ROLE_ADMIN'">First Div</div>
     <!-- this should display -->
-    <div *secHasRole="ROLE_ADMIN" resource="client-id">Authenticated</div>
+    <div *secHasRole="'ROLE_ADMIN'; resource 'client-id'">Second Div</div>
     <!-- this should NOT display -->
-    <div *secHasRole="ROLE_ADMIN" resource="other">Authenticated</div>
+    <div *secHasRole="'ROLE_ADMIN'; resource 'other'">Third Div</div>
     <!-- this should NOT display -->
-    <div *secHasRole="ROLE_USER" resource="client-id">Authenticated</div>
+    <div *secHasRole="'ROLE_USER'">Fourth Div</div>
 
   `
 })

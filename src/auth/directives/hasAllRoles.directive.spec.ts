@@ -39,41 +39,20 @@ describe("directives", () => {
   })
 
   describe('secHasAllRoles', () => {
-    it('should display div if user is on ALL ROLE', () => {
+    it('should display/remove div if user is/not on ALL ROLE', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[0].nativeElement
-      expect(element.style.display).not.toEqual('none')
+      expect(debugElement.length).toEqual(2)
+      expect(debugElement[0].nativeElement.textContent).toContain('First Div')
+      expect(debugElement[1].nativeElement.textContent).toContain('Second Div')
     })
-
-    it('should display div if user is on ONE in RESOURCE', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[1].nativeElement
-      expect(element.style.display).not.toEqual('none')
-    })
-
-
-
-    it('should hide div if user id not on ALL ROLE', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[2].nativeElement
-      expect(element.style.display).toEqual('none')
-    })
-
-    it('should hide div if resource not match', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[3].nativeElement
-      expect(element.style.display).toEqual('none')
-    })
-
     describe("unit tests", () => {
-
+      let directive = new HasAllRoles(null, null, authService, null)
       it('should verify all roles', () => {
-        let directive = new HasAllRoles(null, null, authService, null)
         expect(directive.roleFunction(authService.roles)).toBeTruthy()
+      })
+      it('should return false if not all roles ', () => {
+        expect(directive.roleFunction(['ROLE_ADMIN', 'ROLE_ANY'])).toBeFalsy()
       })
 
     })
@@ -86,13 +65,13 @@ describe("directives", () => {
   selector: 'test-app-component',
   template: `
     <!-- this should display -->
-    <div secHasAllRoles="ROLE_ADMIN, ROLE_PUBLIC">Authenticated</div>
+    <div *secHasAllRoles="'ROLE_ADMIN, ROLE_PUBLIC'">First Div</div>
     <!-- this should display -->
-    <div secHasAllRoles="ROLE_ADMIN">Authenticated</div>
+    <div *secHasAllRoles="'ROLE_ADMIN'">Second Div</div>
     <!-- This should Not Display -->
-    <div secHasAllRoles="ROLE_ADMIN, ROLE_NONE">Authenticated</div>
+    <div *secHasAllRoles="'ROLE_ADMIN, ROLE_NONE'">Authenticated</div>
     <!-- This should Not Display -->
-    <div secHasAllRoles="ROLE_ADMIN, ROLE_PUBLIC" resource="other">Authenticated</div>
+    <div *secHasAllRoles="'ROLE_ADMIN, ROLE_PUBLIC'; resource 'other'">Authenticated</div>
 
   `
 })

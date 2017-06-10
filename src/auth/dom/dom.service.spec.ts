@@ -1,6 +1,6 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { TestBed, ComponentFixture, fakeAsync, tick, inject, async} from '@angular/core/testing'
+import { TestBed, ComponentFixture, inject} from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
 import { AuthModule } from '../auth.module'
 import { AuthService } from '../auth.service'
@@ -45,42 +45,6 @@ describe("dom.service", () => {
     comp = fixture.componentInstance
   })
 
-  // it('should remove element from DOM', inject([DomService], (domService: DomService) => {
-  //   fixture.detectChanges()
-  //   let debugElement = fixture.debugElement.queryAll(By.css("h2"))
-  //   let elementRef = new ElementRef(debugElement[0].nativeElement)
-  //   let element = document.querySelector("h2")
-  //   expect(element).not.toBeNull()
-  //   domService.removeFromDom(elementRef)
-  //   let element2 = document.querySelector("h2")
-  //   expect(element2).toBeNull()
-  // }))
-
-  it('should hide element by visibility', inject([DomService], (domService: DomService) => {
-    fixture.detectChanges()
-    let debugElement = fixture.debugElement.queryAll(By.css("h2"))
-    let elementRef = new ElementRef(debugElement[0].nativeElement)
-    domService.hideFromDom(elementRef, "visibility")
-    expect(elementRef.nativeElement.style.visibility).toEqual('hidden')
-  }))
-
-  it('should hide element by display', inject([DomService], (domService: DomService) => {
-    fixture.detectChanges()
-    let debugElement = fixture.debugElement.queryAll(By.css("h2"))
-    let elementRef = new ElementRef(debugElement[0].nativeElement)
-    domService.hideFromDom(elementRef, "display")
-    expect(elementRef.nativeElement.style.display).toEqual('none')
-  }))
-
-  it('should display element by display', inject([DomService], (domService: DomService) => {
-    fixture.detectChanges()
-    let debugElement = fixture.debugElement.queryAll(By.css("h2"))
-    let elementRef = new ElementRef(debugElement[0].nativeElement)
-    domService.hideFromDom(elementRef, "display")
-    expect(elementRef.nativeElement.style.display).toEqual('none')
-    domService.showFromDom(elementRef)
-    expect(elementRef.nativeElement.style.display).toEqual('inherit')
-  }))
 
   it('should add css class to a element', inject([DomService], (domService: DomService) => {
     fixture.detectChanges()
@@ -90,17 +54,14 @@ describe("dom.service", () => {
     expect(elementRef.nativeElement.classList).toContain('myClass')
   }))
 
-  it('should use remove action configured in SecDirectiveConfig', async(() => {
+  it('should remove the class of a element', inject([DomService], (domService: DomService) => {
     fixture.detectChanges()
-    let debugElement = fixture.debugElement.queryAll(By.css("div"))
-
-    debugElement.forEach(e => {
-      console.info(e.nativeElement)
-    })
-    fixture.detectChanges()
-    expect(debugElement.length).toEqual(2)
+    let debugElement = fixture.debugElement.queryAll(By.css("h2"))
+    let elementRef = new ElementRef(debugElement[0].nativeElement)
+    expect(elementRef.nativeElement.classList).toContain('removeClass')
+    domService.removeClass(elementRef, "removeClass")
+    expect(elementRef.nativeElement.classList).not.toContain('removeClass')
   }))
-
 })
 
 
@@ -108,14 +69,7 @@ describe("dom.service", () => {
   selector: 'test-app-component',
   template: `
     <!-- this should display -->
-    <div *secHasRole="ROLE_ADMIN">Authenticated</div>
-    <!-- this should display -->
-    <div *secHasRole="ROLE_ADMIN" resource="client-id">Authenticated</div>
-    <!-- this should NOT display -->
-    <div *secHasRole="ROLE_ADMIN" resource="other">Authenticated</div>
-    <!-- this should NOT display -->
-    <div *secHasRole="ROLE_USER" resource="client-id">Authenticated</div>
-    <h2>Remove me please</h2>
+    <h2 class='removeClass'>Element</h2>
   `
 })
 class AppComponent {

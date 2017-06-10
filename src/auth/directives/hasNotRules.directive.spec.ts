@@ -39,37 +39,24 @@ describe("directives", () => {
   })
 
   describe('secHasNotRoles', () => {
-    it('should display div if user is NOT on ROLE', () => {
+    it('should create/remove divs based on auth user ROLES', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[0].nativeElement
-      expect(element.style.display).not.toEqual('none')
-    })
-
-    it('should display div if user is not on ALL ROLES', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[1].nativeElement
-      expect(element.style.display).not.toEqual('none')
-    })
-
-
-
-    it('should hide div if user is on any roles', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[2].nativeElement
-      expect(element.style.display).toEqual('none')
-      let element2 = debugElement[3].nativeElement
-      expect(element2.style.display).toEqual('none')
+      expect(debugElement.length).toEqual(2)
+      expect(debugElement[0].nativeElement.textContent).toContain('First Div')
+      expect(debugElement[1].nativeElement.textContent).toContain('Second Div')
     })
 
     describe("unit tests", () => {
-
+      let directive = new HasNotRoles(null, null, authService, null)
       it('should verify any roles', () => {
-        let directive = new HasNotRoles(null, null, authService, null)
         expect(directive.roleFunction(['ROLE_ADMIN', 'ROLE_ANY'])).toBeFalsy()
         expect(directive.roleFunction(['ROLE_FOO', 'ROLE_BAR'])).toBeTruthy()
+      })
+      it('should verify roles with resource', () => {
+        expect(directive.roleFunction(['ROLE_ADMIN', 'ROLE_ANY'], 'client-id')).toBeFalsy()
+        expect(directive.roleFunction(['ROLE_ADMIN', 'ROLE_ANY'], 'other')).toBeTruthy()
+        expect(directive.roleFunction(['ROLE_FOO', 'ROLE_BAR'], 'other')).toBeTruthy()
       })
 
     })
@@ -82,13 +69,13 @@ describe("directives", () => {
   selector: 'test-app-component',
   template: `
     <!-- this should display -->
-    <div secHasNotRoles="ROLE_FOO">Authenticated</div>
+    <div *secHasNotRoles="'ROLE_FOO'">First Div</div>
     <!-- this should display -->
-    <div secHasNotRoles="ROLE_FOO, ROLE_BAR">Authenticated</div>
+    <div *secHasNotRoles="'ROLE_FOO, ROLE_BAR'">Second Div</div>
     <!-- This should Not Display -->
-    <div secHasNotRoles="ROLE_ADMIN, ROLE_NONE">Authenticated</div>
+    <div *secHasNotRoles="'ROLE_ADMIN, ROLE_ANY'">Third</div>
     <!-- This should Not Display -->
-    <div secHasNotRoles="ROLE_ADMIN, ROLE_PUBLIC">Authenticated</div>
+    <div *secHasNotRoles="'ROLE_ADMIN'">Fourty</div>
 
   `
 })

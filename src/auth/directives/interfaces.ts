@@ -20,6 +20,7 @@ export abstract class RoleDirective {
     constructor(protected element: ViewContainerRef, protected domService: DomService, protected _templateRef: TemplateRef<RoleContext>) {}
 
     applyDirective() {
+        this.element.clear()
         let rolesParameter = this.splitRoles(this._context.$roles)
         if (this.roleFunction(rolesParameter, this._context.$resource)) {
             this.domService.performAction(this.element, this._templateRef, this._context, true)

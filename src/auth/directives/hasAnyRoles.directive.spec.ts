@@ -42,38 +42,10 @@ describe("directives", () => {
     it('should display div if user is on all ROLE', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[0].nativeElement
-      expect(element.style.display).not.toEqual('none')
-    })
-
-    it('should display div if user is on ONE ROLE', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[1].nativeElement
-      expect(element.style.display).not.toEqual('none')
-    })
-
-
-
-    it('should display div if user is on any roles', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[2].nativeElement
-      expect(element.style.display).not.toEqual('none')
-    })
-
-    it('should hide if roles is not on resource', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[3].nativeElement
-      expect(element.style.display).toEqual('none')
-    })
-
-    it('should hide if user is not part of any role', () => {
-      fixture.detectChanges()
-      let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      let element = debugElement[4].nativeElement
-      expect(element.style.display).toEqual('none')
+      expect(debugElement.length).toEqual(3)
+      expect(debugElement[0].nativeElement.textContent).toContain('First Div')
+      expect(debugElement[1].nativeElement.textContent).toContain('Second Div')
+      expect(debugElement[2].nativeElement.textContent).toContain('Third Div')
     })
 
     describe("unit tests", () => {
@@ -93,15 +65,15 @@ describe("directives", () => {
   selector: 'test-app-component',
   template: `
     <!-- this should display -->
-    <div secHasAnyRoles="ROLE_ADMIN, ROLE_PUBLIC">Authenticated</div>
+    <div *secHasAnyRoles="'ROLE_ADMIN, ROLE_PUBLIC'">First Div</div>
     <!-- this should display -->
-    <div secHasAnyRoles="ROLE_ADMIN">Authenticated</div>
+    <div *secHasAnyRoles="'ROLE_ADMIN'">Second Div</div>
     <!-- This should Display -->
-    <div secHasAnyRoles="ROLE_ADMIN, ROLE_NONE">Authenticated</div>
+    <div *secHasAnyRoles="'ROLE_ADMIN, ROLE_NONE'">Third Div</div>
     <!-- This should Not Display -->
-    <div secHasAnyRoles="ROLE_ADMIN, ROLE_PUBLIC" resource="other">Authenticated</div>
+    <div *secHasAnyRoles="'ROLE_ADMIN, ROLE_PUBLIC'; resource 'other'">Authenticated</div>
     <!-- this should not display -->
-    <div secHasAnyRoles="ROLE_FOO, ROLE_BAR">Authenticated</div>
+    <div *secHasAnyRoles="'ROLE_FOO, ROLE_BAR'">Authenticated</div>
 
   `
 })

@@ -5,8 +5,17 @@ import { DomService } from '../dom/dom.service'
 
 @Directive({ selector: '[secHasAllRoles]' })
 export class HasAllRoles extends RoleDirective {
-    @Input('secHasAllRoles') _roles: string
-    @Input('resource') _resource: string
+
+    @Input('secHasAllRoles')
+    set hasAllRoles(roles: string) {
+        this._context.$roles = roles
+        this.applyDirective()
+    }
+    @Input('secHasAllRolesResource')
+    set resource(resource: string) {
+        this._context.$resource = resource
+        this.applyDirective()
+    }
 
     constructor(
         protected element: ViewContainerRef,
@@ -16,10 +25,6 @@ export class HasAllRoles extends RoleDirective {
 
     ) {
         super(element, domService, templateRef)
-    }
-
-    ngOnInit() {
-        this.applyDirective()
     }
 
     roleFunction = (roles: string[], resource?: string) => {
