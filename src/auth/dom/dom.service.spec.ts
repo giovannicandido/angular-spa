@@ -13,7 +13,7 @@ let comp: AppComponent
 describe("dom.service", () => {
   const secConfig = new SecDirectiveConfig()
   let authService = new FakeAuthService()
-  secConfig.action = 'remove'
+  secConfig.action = 'addClass'
 
   afterEach(() => { fixture = null ! })
 
@@ -49,19 +49,29 @@ describe("dom.service", () => {
   it('should add css class to a element', inject([DomService], (domService: DomService) => {
     fixture.detectChanges()
     let debugElement = fixture.debugElement.queryAll(By.css("h2"))
-    let elementRef = new ElementRef(debugElement[0].nativeElement)
+    let elementRef = debugElement[0].nativeElement
+
+    expect(elementRef.classList).not.toContain('myClass')
     domService.addClass(elementRef, "myClass")
-    expect(elementRef.nativeElement.classList).toContain('myClass')
+    expect(elementRef.classList).toContain('myClass')
   }))
 
   it('should remove the class of a element', inject([DomService], (domService: DomService) => {
     fixture.detectChanges()
     let debugElement = fixture.debugElement.queryAll(By.css("h2"))
-    let elementRef = new ElementRef(debugElement[0].nativeElement)
-    expect(elementRef.nativeElement.classList).toContain('removeClass')
+    let elementRef = debugElement[0].nativeElement
+
+    expect(elementRef.classList).toContain('removeClass')
     domService.removeClass(elementRef, "removeClass")
-    expect(elementRef.nativeElement.classList).not.toContain('removeClass')
+    expect(elementRef.classList).not.toContain('removeClass')
   }))
+
+  it('should apply css class to DOM instead of remove', () => {
+    fixture.detectChanges()
+    let debugElement = fixture.debugElement.queryAll(By.css("div"))
+    expect(debugElement.length).toEqual(1)
+    expect(debugElement[0].nativeElement.classList).toContain(secConfig.defaultClass)
+  })
 })
 
 
@@ -70,6 +80,7 @@ describe("dom.service", () => {
   template: `
     <!-- this should display -->
     <h2 class='removeClass'>Element</h2>
+    <div *secHasRole="'ROLE_NONE'"></div>
   `
 })
 class AppComponent {

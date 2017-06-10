@@ -1,4 +1,4 @@
-import { ElementRef, ViewContainerRef, TemplateRef, Injectable } from '@angular/core'
+import { ElementRef, ViewContainerRef, EmbeddedViewRef, TemplateRef, Injectable } from '@angular/core'
 
 export type SecAction = 'addClass' | 'remove'
 
@@ -32,12 +32,14 @@ export class DomService {
         break
       }
       case 'addClass': {
+        let viewRef = this.addToDom(element, templateRef, context)
         if (show) {
-          this.removeClass(element.element)
+          this.removeClass(viewRef.rootNodes)
         } else {
-          this.addClass(element.element)
+          this.addClass(viewRef.rootNodes)
         }
       }
+        break
     }
   }
 
@@ -45,16 +47,28 @@ export class DomService {
     element.clear()
   }
 
-  addToDom(element: ViewContainerRef, templateRef: TemplateRef<any>, context: any) {
-    element.createEmbeddedView(templateRef, context)
+  addToDom(element: ViewContainerRef, templateRef: TemplateRef<any>, context: any): EmbeddedViewRef<any> {
+    return element.createEmbeddedView(templateRef, context)
   }
 
-  addClass(element: ElementRef, cssClass: string = this.config.defaultClass) {
-    element.nativeElement.classList.add(cssClass)
+  addClass(element: any | any[], cssClass: string = this.config.defaultClass) {
+    if (element.constructor === Array) {
+      for (let e of element) {
+        e.classList.add(cssClass)
+      }
+    } else {
+      element.classList.add(cssClass)
+    }
   }
 
-  removeClass(element: ElementRef, cssClass: string = this.config.defaultClass) {
-    element.nativeElement.classList.remove(cssClass)
+  removeClass(element: any | any[], cssClass: string = this.config.defaultClass) {
+    if (element.construct === Array) {
+      for (let e of element) {
+        e.classList.remove(cssClass)
+      }
+    } else {
+      element.classList.remove(cssClass)
+    }
   }
 }
 
