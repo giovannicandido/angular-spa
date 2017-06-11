@@ -1,0 +1,17 @@
+baseURL = "https://github.io/atende/angular-spa"
+languageCode = "en-us"
+title = "Angular SPA Library"
+
+theme = "hugo-theme-learn"
+
+[params]
+# Author of the site, will be used in meta information
+  author = "Giovanni Silva"
+  # Description of the site, will be used in meta information
+  description = "Angular library for Enterprise Single Page Applications"
+  # Shows a checkmark for visited pages on the menu. Default to false
+  showVisitedLinks = false
+  # Automatically generates prev and next arrows
+  autoNav = true
+  # Activate search. Don't forget to generate the JSON index file (go check get started page)
+  search = false
