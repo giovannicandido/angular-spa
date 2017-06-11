@@ -6,20 +6,20 @@
  /* tslint:disable */
 
 
-import * as import0 from "@angular/core"
-import * as import1 from "./auth.module"
-import * as import2 from "@angular/http"
-import * as import3 from "../logger/logger.module"
-import * as import4 from "angular-http-interceptor/interceptor.module"
-import * as import5 from "./auth.service"
-import * as import6 from "../logger/logger.service"
-import * as import7 from "./guards/login-guard"
-import * as import8 from "./listeners/keycloak.listener"
-import * as import9 from "./dom/dom.service"
-import * as import10 from "./interceptors/refresh-token-http-interceptor"
-import * as import11 from "@angular/router"
-import * as import12 from "angular-http-interceptor/interfaces"
-import * as import13 from "angular-http-interceptor/custom-http"
+import * as import0 from '@angular/core';
+import * as import1 from './auth.module';
+import * as import2 from '@angular/http';
+import * as import3 from '../logger/logger.module';
+import * as import4 from 'angular-http-interceptor/interceptor.module';
+import * as import5 from './auth.service';
+import * as import6 from '../logger/logger.service';
+import * as import7 from './dom/dom.service';
+import * as import8 from './guards/login-guard';
+import * as import9 from './listeners/keycloak.listener';
+import * as import10 from './interceptors/refresh-token-http-interceptor';
+import * as import11 from '@angular/router';
+import * as import12 from 'angular-http-interceptor/interfaces';
+import * as import13 from 'angular-http-interceptor/custom-http';
 class AuthModuleInjector extends import0.ɵNgModuleInjector<import1.AuthModule> {
   _HttpModule_0:import2.HttpModule;
   _LoggerModule_1:import3.LoggerModule;
@@ -35,9 +35,10 @@ class AuthModuleInjector extends import0.ɵNgModuleInjector<import1.AuthModule> 
   __RequestOptions_11:import2.BaseRequestOptions;
   __Http_12:any;
   __CustomHttp_13:any;
-  __LoginGuard_14:import7.LoginGuard;
-  __AppSecurityListener_15:import8.AppSecurityListener;
-  __SecDirectiveConfig_16:import9.SecDirectiveConfig;
+  __SecDirectiveConfig_14:import7.SecDirectiveConfig;
+  __DomService_15:import7.DomService;
+  __LoginGuard_16:import8.LoginGuard;
+  __AppSecurityListener_17:import9.AppSecurityListener;
   constructor(parent:import0.Injector) {
     super(parent,([] as any[]),([] as any[]));
   }
@@ -81,17 +82,21 @@ class AuthModuleInjector extends import0.ɵNgModuleInjector<import1.AuthModule> 
     if ((this.__CustomHttp_13 == null)) { (this.__CustomHttp_13 = this._Http_12); }
     return this.__CustomHttp_13;
   }
-  get _LoginGuard_14():import7.LoginGuard {
-    if ((this.__LoginGuard_14 == null)) { (this.__LoginGuard_14 = new import7.LoginGuard(this._AuthService_4)); }
-    return this.__LoginGuard_14;
+  get _SecDirectiveConfig_14():import7.SecDirectiveConfig {
+    if ((this.__SecDirectiveConfig_14 == null)) { (this.__SecDirectiveConfig_14 = new import7.SecDirectiveConfig()); }
+    return this.__SecDirectiveConfig_14;
   }
-  get _AppSecurityListener_15():import8.AppSecurityListener {
-    if ((this.__AppSecurityListener_15 == null)) { (this.__AppSecurityListener_15 = new import8.AppSecurityListener(this._AuthService_4,this.parent.get(import11.Router),this._Logger_5)); }
-    return this.__AppSecurityListener_15;
+  get _DomService_15():import7.DomService {
+    if ((this.__DomService_15 == null)) { (this.__DomService_15 = new import7.DomService(this._SecDirectiveConfig_14)); }
+    return this.__DomService_15;
   }
-  get _SecDirectiveConfig_16():import9.SecDirectiveConfig {
-    if ((this.__SecDirectiveConfig_16 == null)) { (this.__SecDirectiveConfig_16 = new import9.SecDirectiveConfig()); }
-    return this.__SecDirectiveConfig_16;
+  get _LoginGuard_16():import8.LoginGuard {
+    if ((this.__LoginGuard_16 == null)) { (this.__LoginGuard_16 = new import8.LoginGuard(this._AuthService_4)); }
+    return this.__LoginGuard_16;
+  }
+  get _AppSecurityListener_17():import9.AppSecurityListener {
+    if ((this.__AppSecurityListener_17 == null)) { (this.__AppSecurityListener_17 = new import9.AppSecurityListener(this._AuthService_4,this.parent.get(import11.Router),this._Logger_5)); }
+    return this.__AppSecurityListener_17;
   }
   createInternal():import1.AuthModule {
     this._HttpModule_0 = new import2.HttpModule();
@@ -115,13 +120,14 @@ class AuthModuleInjector extends import0.ɵNgModuleInjector<import1.AuthModule> 
     if ((token === import2.RequestOptions)) { return this._RequestOptions_11; }
     if ((token === import2.Http)) { return this._Http_12; }
     if ((token === import13.CustomHttp)) { return this._CustomHttp_13; }
-    if ((token === import7.LoginGuard)) { return this._LoginGuard_14; }
-    if ((token === import8.AppSecurityListener)) { return this._AppSecurityListener_15; }
-    if ((token === import9.SecDirectiveConfig)) { return this._SecDirectiveConfig_16; }
+    if ((token === import7.SecDirectiveConfig)) { return this._SecDirectiveConfig_14; }
+    if ((token === import7.DomService)) { return this._DomService_15; }
+    if ((token === import8.LoginGuard)) { return this._LoginGuard_16; }
+    if ((token === import9.AppSecurityListener)) { return this._AppSecurityListener_17; }
     return notFoundResult;
   }
   destroyInternal():void {
   }
 }
 export const AuthModuleNgFactory:import0.NgModuleFactory<import1.AuthModule> = new import0.NgModuleFactory<any>(AuthModuleInjector,import1.AuthModule);
-//# sourceMappingURL=data:application/json;base64,eyJmaWxlIjoiL2hvbWUvZ2lvdmFubmkvUHJvamVjdHMvYXRlbmRlL2FuZ3VsYXItc3BhL3NyYy9hdXRoL2F1dGgubW9kdWxlLm5nZmFjdG9yeS50cyIsInZlcnNpb24iOjMsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5nOi8vL2hvbWUvZ2lvdmFubmkvUHJvamVjdHMvYXRlbmRlL2FuZ3VsYXItc3BhL3NyYy9hdXRoL2F1dGgubW9kdWxlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIiAiXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OzsifQ==
+//# sourceMappingURL=data:application/json;base64,eyJmaWxlIjoiL2hvbWUvZ2lvdmFubmkvUHJvamVjdHMvYXRlbmRlL2FuZ3VsYXItc3BhL3NyYy9hdXRoL2F1dGgubW9kdWxlLm5nZmFjdG9yeS50cyIsInZlcnNpb24iOjMsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5nOi8vL2hvbWUvZ2lvdmFubmkvUHJvamVjdHMvYXRlbmRlL2FuZ3VsYXItc3BhL3NyYy9hdXRoL2F1dGgubW9kdWxlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIiAiXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OzsifQ==
