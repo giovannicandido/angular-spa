@@ -16,6 +16,19 @@ export class HasAnyRoles extends RoleDirective {
         this._context.$resource = resource
         this.applyDirective()
     }
+
+    @Input('secHasAnyRolesAction')
+    set action(action: string) {
+        this._context.$action = action
+        this.applyDirective()
+    }
+
+    @Input('secHasAnyRolesCssClass')
+    set cssClass(cssClass: string) {
+        this._context.$cssClass = cssClass
+        this.applyDirective()
+    }
+
     constructor(
         protected element: ViewContainerRef,
         protected domService: DomService,

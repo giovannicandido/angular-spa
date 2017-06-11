@@ -38,9 +38,24 @@ describe("directives", () => {
     it('should display/remove div if user is/not on ROLE', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      expect(debugElement.length).toEqual(2)
+      expect(debugElement.length).toEqual(4)
       expect(debugElement[0].nativeElement.textContent).toContain('First Div')
       expect(debugElement[1].nativeElement.textContent).toContain('Second Div')
+      expect(debugElement[2].nativeElement.textContent).toContain('Default class applied')
+      expect(debugElement[3].nativeElement.textContent).toContain('My class')
+    })
+    it('should add default class to element instead of remove', () => {
+      fixture.detectChanges()
+      let debugElement = fixture.debugElement.queryAll(By.css("div"))
+      expect(debugElement.length).toEqual(4)
+      expect(debugElement[2].nativeElement.classList).toContain('disabled')
+    })
+
+    it('should add class as parameter to element instead of remove', () => {
+      fixture.detectChanges()
+      let debugElement = fixture.debugElement.queryAll(By.css("div"))
+      expect(debugElement.length).toEqual(4)
+      expect(debugElement[3].nativeElement.classList).toContain('myClass')
     })
     describe('unit', () => {
       let hasRole = new HasRole(null, null, authService, null)
@@ -73,6 +88,9 @@ describe("directives", () => {
     <div *secHasRole="'ROLE_ADMIN'; resource 'other'">Third Div</div>
     <!-- this should NOT display -->
     <div *secHasRole="'ROLE_USER'">Fourth Div</div>
+    <!-- Configurations -->
+    <div *secHasRole="'ROLE_ANY'; action 'addClass'">Default class applied</div>
+    <div *secHasRole="'ROLE_ANY'; action 'addClass'; cssClass 'myClass'">My class</div>
 
   `
 })

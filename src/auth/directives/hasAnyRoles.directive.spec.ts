@@ -42,10 +42,21 @@ describe("directives", () => {
     it('should display div if user is on all ROLE', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      expect(debugElement.length).toEqual(3)
+      expect(debugElement.length).toEqual(5)
       expect(debugElement[0].nativeElement.textContent).toContain('First Div')
       expect(debugElement[1].nativeElement.textContent).toContain('Second Div')
       expect(debugElement[2].nativeElement.textContent).toContain('Third Div')
+    })
+    it('should add default cssClass to element instead of remove', () => {
+      fixture.detectChanges()
+      let debugElement = fixture.debugElement.queryAll(By.css("div"))
+      expect(debugElement[3].nativeElement.classList).toContain('disabled')
+    })
+
+    it('should add cssClass as parameter to element instead of remove', () => {
+      fixture.detectChanges()
+      let debugElement = fixture.debugElement.queryAll(By.css("div"))
+      expect(debugElement[4].nativeElement.classList).toContain('myClass')
     })
 
     describe("unit tests", () => {
@@ -74,6 +85,9 @@ describe("directives", () => {
     <div *secHasAnyRoles="'ROLE_ADMIN, ROLE_PUBLIC'; resource 'other'">Authenticated</div>
     <!-- this should not display -->
     <div *secHasAnyRoles="'ROLE_FOO, ROLE_BAR'">Authenticated</div>
+    <!-- Configurations -->
+    <div *secHasAnyRoles="'ROLE_FOO'; action 'addClass'">Default class applied</div>
+    <div *secHasAnyRoles="'ROLE_FOO'; action 'addClass'; cssClass 'myClass'">My class</div>
 
   `
 })

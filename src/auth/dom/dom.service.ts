@@ -1,4 +1,5 @@
 import { ElementRef, ViewContainerRef, EmbeddedViewRef, TemplateRef, Injectable } from '@angular/core'
+import { RoleContext } from '../directives/interfaces'
 
 export type SecAction = 'addClass' | 'remove'
 
@@ -19,10 +20,11 @@ export function showHidden(element: ElementRef) {
 export class DomService {
   constructor(private config: SecDirectiveConfig) { }
 
-  performAction(element: ViewContainerRef, templateRef: TemplateRef<any>, context: any,
-    show: boolean, action: SecAction = this.config.action) {
-
-    switch (action) {
+  performAction(element: ViewContainerRef, templateRef: TemplateRef<any>, context: RoleContext,
+    show: boolean) {
+    // If context has config propertys like action apply then, otherwise use default
+    this.mergeConfig(context)
+    switch (context.$action) {
       case 'remove': {
         if (show) {
           this.addToDom(element, templateRef, context)
@@ -34,15 +36,19 @@ export class DomService {
       case 'addClass': {
         let viewRef = this.addToDom(element, templateRef, context)
         if (show) {
-          this.removeClass(viewRef.rootNodes)
+          this.removeClass(viewRef.rootNodes, context.$cssClass)
         } else {
-          this.addClass(viewRef.rootNodes)
+          this.addClass(viewRef.rootNodes, context.$cssClass)
         }
       }
         break
     }
   }
 
+  mergeConfig(context: RoleContext) {
+    context.$action = context.$action ? context.$action : this.config.action
+    context.$cssClass = context.$cssClass ? context.$cssClass : this.config.defaultClass
+  }
   removeFromDom(element: ViewContainerRef) {
     element.clear()
   }
@@ -62,7 +68,7 @@ export class DomService {
   }
 
   removeClass(element: any | any[], cssClass: string = this.config.defaultClass) {
-    if (element.construct === Array) {
+    if (element.constructor === Array) {
       for (let e of element) {
         e.classList.remove(cssClass)
       }

@@ -27,6 +27,18 @@ export class HasRole extends RoleDirective {
     this.applyDirective()
   }
 
+  @Input('secHasRoleAction')
+  set action(action: string) {
+    this._context.$action = action
+    this.applyDirective()
+  }
+
+  @Input('secHasRoleCssClass')
+  set cssClass(cssClass: string) {
+    this._context.$cssClass = cssClass
+    this.applyDirective()
+  }
+
 
 
   roleFunction: RoleFunction = (role, resource) => {

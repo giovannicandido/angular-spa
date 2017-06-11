@@ -11,11 +11,25 @@ export class HasNotRoles extends RoleDirective {
         this._context.$roles = roles
         this.applyDirective()
     }
+
     @Input('secHasNotRolesResource')
     set resource(resource: string) {
         this._context.$resource = resource
         this.applyDirective()
     }
+
+    @Input('secHasNotRolesAction')
+    set action(action: string) {
+        this._context.$action = action
+        this.applyDirective()
+    }
+
+    @Input('secHasNotRolesCssClass')
+    set cssClass(cssClass: string) {
+        this._context.$cssClass = cssClass
+        this.applyDirective()
+    }
+
 
     constructor(
         protected element: ViewContainerRef,

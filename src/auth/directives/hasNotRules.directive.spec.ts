@@ -42,9 +42,22 @@ describe("directives", () => {
     it('should create/remove divs based on auth user ROLES', () => {
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
-      expect(debugElement.length).toEqual(2)
+      expect(debugElement.length).toEqual(4)
       expect(debugElement[0].nativeElement.textContent).toContain('First Div')
       expect(debugElement[1].nativeElement.textContent).toContain('Second Div')
+    })
+    it('should add default cssClass to element instead of remove', () => {
+      fixture.detectChanges()
+      let debugElement = fixture.debugElement.queryAll(By.css("div"))
+      expect(debugElement.length).toEqual(4)
+      expect(debugElement[2].nativeElement.classList).toContain('disabled')
+    })
+
+    it('should add cssClass as parameter to element instead of remove', () => {
+      fixture.detectChanges()
+      let debugElement = fixture.debugElement.queryAll(By.css("div"))
+      expect(debugElement.length).toEqual(4)
+      expect(debugElement[3].nativeElement.classList).toContain('myClass')
     })
 
     describe("unit tests", () => {
@@ -76,7 +89,9 @@ describe("directives", () => {
     <div *secHasNotRoles="'ROLE_ADMIN, ROLE_ANY'">Third</div>
     <!-- This should Not Display -->
     <div *secHasNotRoles="'ROLE_ADMIN'">Fourty</div>
-
+    <!-- Configurations -->
+    <div *secHasNotRoles="'ROLE_ADMIN'; action 'addClass'">Default class applied</div>
+    <div *secHasNotRoles="'ROLE_ADMIN'; action 'addClass'; cssClass 'myClass'">My class</div>
   `
 })
 class AppComponent {
