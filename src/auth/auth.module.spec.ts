@@ -1,9 +1,9 @@
-import { Component } from '@angular/core'
-import { TestBed, ComponentFixture } from '@angular/core/testing'
-import { By } from '@angular/platform-browser'
-import { AuthModule } from './auth.module'
-import { AuthService } from './auth.service'
-import { FakeAuthService } from '../test/fake-auth.service'
+import { Component } from "@angular/core"
+import { ComponentFixture, TestBed } from "@angular/core/testing"
+import { By } from "@angular/platform-browser"
+import { AuthModule } from "./auth.module"
+import { AuthService } from "./auth.service"
+import { FakeAuthService } from "../test/fake-auth.service"
 
 let fixture: ComponentFixture<AppComponent>
 let comp: AppComponent

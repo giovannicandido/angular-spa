@@ -17,7 +17,7 @@ module.exports = config => {
         preprocessors: {
             'karma.entry.js': ['webpack', 'sourcemap']
         },
-        reporters: ['spec'],
+        reporters: ['spec', 'kjhtml'],
         coverageReporter: { type: 'in-memory' },
         remapCoverageReporter: { html: './coverage' },
         singleRun: false,

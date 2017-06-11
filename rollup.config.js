@@ -27,6 +27,7 @@ export default {
     'angular-http-interceptor',
     'rxjs/add/observable/fromPromise',
     'rxjs/Observable',
+    'rxjs/Subject',
     'rxjs/add/operator/mergeMap'
   ],
   globals: {

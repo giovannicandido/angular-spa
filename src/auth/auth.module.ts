@@ -1,15 +1,18 @@
 import { NgModule } from "@angular/core"
 import { HttpModule } from "@angular/http"
-import { InterceptorModule, Interceptor } from "angular-http-interceptor"
+import { Interceptor, InterceptorModule } from "angular-http-interceptor"
 
-import { SecIsAuthenticated, SecIsNotAuthenticated } from "./directives"
-import { LoginGuard } from './guards'
-import { RefreshTokenHttpInterceptor } from './interceptors'
-import { AppSecurityListener } from './listeners'
-import { LoggerModule } from '../logger'
-import {AuthService} from "./auth.service"
+import { HasAllRoles, HasAnyRoles, HasNotRoles, HasRole, SecIsAuthenticated, SecIsNotAuthenticated } from "./directives"
+import { LoginGuard } from "./guards"
+import { RefreshTokenHttpInterceptor } from "./interceptors"
+import { AppSecurityListener } from "./listeners"
+import { LoggerModule } from "../logger"
+import { AuthService } from "./auth.service"
+import { DomService, SecDirectiveConfig } from "./dom/dom.service"
 
 const providers = [
+  DomService,
+  SecDirectiveConfig,
   LoginGuard,
   {
     provide: Interceptor,
@@ -17,11 +20,16 @@ const providers = [
     multi: true
   },
   AppSecurityListener,
-  AuthService
+  AuthService,
+  SecDirectiveConfig
 ]
 const declarations = [
   SecIsAuthenticated,
-  SecIsNotAuthenticated
+  SecIsNotAuthenticated,
+  HasRole,
+  HasAllRoles,
+  HasAnyRoles,
+  HasNotRoles
 ]
 
 @NgModule({

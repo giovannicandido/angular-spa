@@ -1,12 +1,11 @@
-import { Component } from '@angular/core'
-import { HttpModule, Request, RequestOptions, Headers } from '@angular/http'
-import { Router } from '@angular/router'
-import { TestBed, ComponentFixture, inject, fakeAsync, tick } from '@angular/core/testing'
-import { By } from '@angular/platform-browser'
-import { AuthModule } from '../auth.module'
-import { AuthService } from '../auth.service'
-import { RefreshTokenHttpInterceptor } from './refresh-token-http-interceptor'
-import { FakeAuthService } from '../../test/fake-auth.service'
+import { Component } from "@angular/core"
+import { HttpModule, Request, RequestOptions } from "@angular/http"
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from "@angular/core/testing"
+import { By } from "@angular/platform-browser"
+import { AuthModule } from "../auth.module"
+import { AuthService } from "../auth.service"
+import { RefreshTokenHttpInterceptor } from "./refresh-token-http-interceptor"
+import { FakeAuthService } from "../../test/fake-auth.service"
 
 let fixture: ComponentFixture<AppComponent>
 let comp: AppComponent
@@ -30,10 +29,10 @@ describe("refresh-token-http-interceptor", () => {
 
 
     //   // create component and test fixture
-    fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(AppComponent)
 
     //   // get test component from the fixture
-    comp = fixture.componentInstance;
+    comp = fixture.componentInstance
   })
 
   it('should inject', () => {
@@ -47,11 +46,11 @@ describe("refresh-token-http-interceptor", () => {
   it('should resolve even if cant refresh token', fakeAsync(
     inject([RefreshTokenHttpInterceptor, AuthService], (refreshToken: RefreshTokenHttpInterceptor, auth: AuthService) => {
       let request = new Request(new RequestOptions())
-      let requestReturned;
+      let requestReturned
       let fakePromise = (fn: () => any) => {
         // fn()
-        return {error: (fn) => {
-          fn()
+        return {error: (err) => {
+          err()
         }}
       }
       spyOn(auth.keycloak, 'updateToken').and.returnValue({success: fakePromise})

@@ -7,7 +7,7 @@ import { Interceptor } from "angular-http-interceptor"
 import { AuthService } from "../auth.service"
 import { Logger } from "../../logger/logger.service"
 
-import 'rxjs/add/observable/fromPromise'
+import "rxjs/add/observable/fromPromise"
 
 @Injectable()
 export class RefreshTokenHttpInterceptor implements Interceptor {
