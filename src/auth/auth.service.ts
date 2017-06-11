@@ -1,4 +1,4 @@
-import { Injectable, InjectionToken, Inject, Optional } from "@angular/core"
+import { Inject, Injectable, InjectionToken, Optional } from "@angular/core"
 import { Account } from "./account/account"
 
 import { Observable } from "rxjs/Observable"

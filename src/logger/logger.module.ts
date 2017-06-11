@@ -1,5 +1,5 @@
-import {NgModule} from "@angular/core"
-import {Logger} from "./logger.service"
+import { NgModule } from "@angular/core"
+import { Logger } from "./logger.service"
 
 @NgModule({
     providers: [

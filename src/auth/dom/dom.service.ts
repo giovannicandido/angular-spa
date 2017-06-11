@@ -1,5 +1,5 @@
-import { ElementRef, ViewContainerRef, EmbeddedViewRef, TemplateRef, Injectable } from '@angular/core'
-import { RoleContext } from '../directives/interfaces'
+import { ElementRef, EmbeddedViewRef, Injectable, TemplateRef, ViewContainerRef } from "@angular/core"
+import { RoleContext } from "../directives/interfaces"
 
 export type SecAction = 'addClass' | 'remove'
 

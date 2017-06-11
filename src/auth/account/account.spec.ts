@@ -1,4 +1,4 @@
-import { Account } from './account'
+import { Account } from "./account"
 
 describe("account", function(){
     it("should verify accountInRole", () => {

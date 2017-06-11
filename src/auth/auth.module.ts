@@ -1,14 +1,14 @@
-import { NgModule, Renderer2, RendererFactory2 } from "@angular/core"
+import { NgModule } from "@angular/core"
 import { HttpModule } from "@angular/http"
-import { InterceptorModule, Interceptor } from "angular-http-interceptor"
+import { Interceptor, InterceptorModule } from "angular-http-interceptor"
 
-import { SecIsAuthenticated, SecIsNotAuthenticated, HasRole, HasAllRoles, HasAnyRoles, HasNotRoles } from "./directives"
-import { LoginGuard } from './guards'
-import { RefreshTokenHttpInterceptor } from './interceptors'
-import { AppSecurityListener } from './listeners'
-import { LoggerModule } from '../logger'
+import { HasAllRoles, HasAnyRoles, HasNotRoles, HasRole, SecIsAuthenticated, SecIsNotAuthenticated } from "./directives"
+import { LoginGuard } from "./guards"
+import { RefreshTokenHttpInterceptor } from "./interceptors"
+import { AppSecurityListener } from "./listeners"
+import { LoggerModule } from "../logger"
 import { AuthService } from "./auth.service"
-import { SecDirectiveConfig, DomService } from './dom/dom.service'
+import { DomService, SecDirectiveConfig } from "./dom/dom.service"
 
 const providers = [
   DomService,

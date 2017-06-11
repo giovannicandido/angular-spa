@@ -1,7 +1,7 @@
-import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@angular/core'
-import { AuthService } from '../auth.service'
-import { RoleDirective, RoleContext } from './interfaces'
-import { DomService } from '../dom/dom.service'
+import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core"
+import { AuthService } from "../auth.service"
+import { RoleContext, RoleDirective } from "./interfaces"
+import { DomService } from "../dom/dom.service"
 
 @Directive({ selector: '[secHasAnyRoles]' })
 export class HasAnyRoles extends RoleDirective {

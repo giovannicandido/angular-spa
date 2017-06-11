@@ -1,5 +1,5 @@
-import { hideFromDom, showHidden, DomService } from '../dom/dom.service'
-import { ViewContainerRef, Injectable, TemplateRef } from '@angular/core'
+import { DomService } from "../dom/dom.service"
+import { TemplateRef, ViewContainerRef } from "@angular/core"
 
 export type RoleFunction = (roles: string[], resource: string) => boolean
 

@@ -6,20 +6,20 @@
  /* tslint:disable */
 
 
-import * as import0 from '@angular/core';
-import * as import1 from './auth.module';
-import * as import2 from '@angular/http';
-import * as import3 from '../logger/logger.module';
-import * as import4 from 'angular-http-interceptor/interceptor.module';
-import * as import5 from './auth.service';
-import * as import6 from '../logger/logger.service';
-import * as import7 from './guards/login-guard';
-import * as import8 from './listeners/keycloak.listener';
-import * as import9 from './dom/dom.service';
-import * as import10 from './interceptors/refresh-token-http-interceptor';
-import * as import11 from '@angular/router';
-import * as import12 from 'angular-http-interceptor/interfaces';
-import * as import13 from 'angular-http-interceptor/custom-http';
+import * as import0 from "@angular/core"
+import * as import1 from "./auth.module"
+import * as import2 from "@angular/http"
+import * as import3 from "../logger/logger.module"
+import * as import4 from "angular-http-interceptor/interceptor.module"
+import * as import5 from "./auth.service"
+import * as import6 from "../logger/logger.service"
+import * as import7 from "./guards/login-guard"
+import * as import8 from "./listeners/keycloak.listener"
+import * as import9 from "./dom/dom.service"
+import * as import10 from "./interceptors/refresh-token-http-interceptor"
+import * as import11 from "@angular/router"
+import * as import12 from "angular-http-interceptor/interfaces"
+import * as import13 from "angular-http-interceptor/custom-http"
 class AuthModuleInjector extends import0.ɵNgModuleInjector<import1.AuthModule> {
   _HttpModule_0:import2.HttpModule;
   _LoggerModule_1:import3.LoggerModule;

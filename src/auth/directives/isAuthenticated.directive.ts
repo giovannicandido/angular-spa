@@ -1,8 +1,7 @@
-import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@angular/core'
-import { AuthService } from '../auth.service'
-import { hideFromDom, showHidden } from '../dom/dom.service'
-import { DomService } from '../dom/dom.service'
-import { RoleContext } from './interfaces'
+import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core"
+import { AuthService } from "../auth.service"
+import { DomService } from "../dom/dom.service"
+import { RoleContext } from "./interfaces"
 
 /**
  * This directive is like *ngIf.

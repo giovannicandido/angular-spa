@@ -1,7 +1,7 @@
 import { fakeAsync, tick } from "@angular/core/testing"
 
-import { LoginGuard } from './login-guard'
-import { FakeAuthService } from '../../test/fake-auth.service'
+import { LoginGuard } from "./login-guard"
+import { FakeAuthService } from "../../test/fake-auth.service"
 
 describe("LoginGuard", function () {
     let authMock = new FakeAuthService()

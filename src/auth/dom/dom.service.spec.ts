@@ -1,11 +1,11 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { TestBed, ComponentFixture, inject} from '@angular/core/testing'
-import { By } from '@angular/platform-browser'
-import { AuthModule } from '../auth.module'
-import { AuthService } from '../auth.service'
-import { FakeAuthService } from '../../test/fake-auth.service'
-import { SecDirectiveConfig, DomService } from './dom.service'
+import { Component } from "@angular/core"
+import { CommonModule } from "@angular/common"
+import { ComponentFixture, inject, TestBed } from "@angular/core/testing"
+import { By } from "@angular/platform-browser"
+import { AuthModule } from "../auth.module"
+import { AuthService } from "../auth.service"
+import { FakeAuthService } from "../../test/fake-auth.service"
+import { DomService, SecDirectiveConfig } from "./dom.service"
 
 let fixture: ComponentFixture<AppComponent>
 let comp: AppComponent

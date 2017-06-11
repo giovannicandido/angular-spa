@@ -1,13 +1,13 @@
-import { Component } from '@angular/core'
-import { HttpModule } from '@angular/http'
-import { Router } from '@angular/router'
-import { TestBed, ComponentFixture, inject } from '@angular/core/testing'
-import { By } from '@angular/platform-browser'
-import { AuthModule } from '../auth.module'
-import { AuthService } from '../auth.service'
-import { AppSecurityListener } from './keycloak.listener'
-import { FakeAuthService } from '../../test/fake-auth.service'
-import { Logger } from '../../logger/logger.service'
+import { Component } from "@angular/core"
+import { HttpModule } from "@angular/http"
+import { Router } from "@angular/router"
+import { ComponentFixture, inject, TestBed } from "@angular/core/testing"
+import { By } from "@angular/platform-browser"
+import { AuthModule } from "../auth.module"
+import { AuthService } from "../auth.service"
+import { AppSecurityListener } from "./keycloak.listener"
+import { FakeAuthService } from "../../test/fake-auth.service"
+import { Logger } from "../../logger/logger.service"
 
 let fixture: ComponentFixture<AppComponent>
 let comp: AppComponent

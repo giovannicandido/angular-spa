@@ -1,8 +1,8 @@
-import { KeycloakType, AuthService, KeycloakPromise } from '../auth/auth.service'
+import { AuthService, KeycloakPromise, KeycloakType } from "../auth/auth.service"
 import "rxjs/add/operator/mergeMap"
-import { Account } from '../auth/account/account'
+import { Account } from "../auth/account/account"
 
-import 'rxjs/add/observable/of'
+import "rxjs/add/observable/of"
 
 export class FakeKeycloak {
 

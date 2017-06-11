@@ -1,4 +1,10 @@
-import { splitRoles } from './interfaces'
+import { RoleDirective, RoleFunction, splitRoles } from "./interfaces"
+
+class RoleDirectiveTest extends RoleDirective {
+    roleFunction: RoleFunction = (roles, resource) => {
+        return true
+    }
+}
 
 describe('interfaces', () => {
     it('should split roles by \',\'', () => {
@@ -11,7 +17,11 @@ describe('interfaces', () => {
 })
 
 describe('RoleDirective', () => {
-    it('should use SecConfig to perform action', () => {
-        
+    it('should split roles', () => {
+        let directive = new RoleDirectiveTest(null, null, null)
+        let result = directive.splitRoles("a, b")
+        expect(result).toContain('a')
+        expect(result).toContain('b')
+        expect(result.length).toEqual(2)
     })
 })
