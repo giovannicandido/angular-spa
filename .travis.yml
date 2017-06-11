@@ -19,7 +19,7 @@ before_script:
 install:
   - wget -O /tmp/hugo.deb https://github.com/spf13/hugo/releases/download/v0.21/hugo_0.21_Linux-64bit.deb
   - sudo dpkg -i /tmp/hugo.deb
-  - npm install
+  - yarn install
 script:
   - npm run lint
   - npm run test:ci
