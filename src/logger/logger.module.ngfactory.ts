@@ -6,9 +6,9 @@
  /* tslint:disable */
 
 
-import * as import0 from "@angular/core"
-import * as import1 from "./logger.module"
-import * as import2 from "./logger.service"
+import * as import0 from '@angular/core';
+import * as import1 from './logger.module';
+import * as import2 from './logger.service';
 class LoggerModuleInjector extends import0.ɵNgModuleInjector<import1.LoggerModule> {
   _LoggerModule_0:import1.LoggerModule;
   __Logger_1:import2.Logger;

@@ -1,6 +1,6 @@
 {
   "name": "angular-spa",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Utilities for angular 2 applications backed by generator-spring-spa project",
   "main": "index.js",
   "angular-cli": {},
