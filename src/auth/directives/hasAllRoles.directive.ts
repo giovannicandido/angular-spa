@@ -7,7 +7,7 @@ import { DomService } from "../dom/dom.service"
 export class HasAllRoles extends RoleDirective {
 
     @Input('secHasAllRoles')
-    set hasAllRoles(roles: string) {
+    set hasAllRoles(roles: string | string[]) {
         this._context.$roles = roles
         this.applyDirective()
     }

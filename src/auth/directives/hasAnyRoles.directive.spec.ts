@@ -6,8 +6,8 @@ import { AuthService } from "../auth.service"
 import { FakeAuthService } from "../../test/fake-auth.service"
 import { HasAnyRoles } from "./hasAnyRoles.directive"
 
-let fixture: ComponentFixture<AppComponent>
-let comp: AppComponent
+let fixture: ComponentFixture<TestComponent>
+let comp: TestComponent
 
 describe("directives", () => {
   let authService = new FakeAuthService()
@@ -17,7 +17,7 @@ describe("directives", () => {
       imports: [
         AuthModule,
       ],
-      declarations: [AppComponent],
+      declarations: [TestComponent],
       providers: [
         {
           provide: AuthService,
@@ -25,14 +25,6 @@ describe("directives", () => {
         }
       ]
     })
-
-
-    //   // create component and test fixture
-    fixture = TestBed.createComponent(AppComponent)
-
-    //   // get test component from the fixture
-    comp = fixture.componentInstance
-
     // Reset ROLES
     authService.roles = ["ROLE_ADMIN", "ROLE_PUBLIC"]
     authService.resource = "client-id"
@@ -40,6 +32,7 @@ describe("directives", () => {
 
   describe('secHasAnyRoles', () => {
     it('should display div if user is on all ROLE', () => {
+      createDefaultTestComponent()
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
       expect(debugElement.length).toEqual(5)
@@ -48,15 +41,25 @@ describe("directives", () => {
       expect(debugElement[2].nativeElement.textContent).toContain('Third Div')
     })
     it('should add default cssClass to element instead of remove', () => {
+      createDefaultTestComponent()
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
       expect(debugElement[3].nativeElement.classList).toContain('disabled')
     })
 
     it('should add cssClass as parameter to element instead of remove', () => {
+      createDefaultTestComponent()
       fixture.detectChanges()
       let debugElement = fixture.debugElement.queryAll(By.css("div"))
       expect(debugElement[4].nativeElement.classList).toContain('myClass')
+    })
+
+    it('should accept array of strings', () => {
+      fixture = createTestComponent("<div *secHasAnyRoles=\"roles\">This should display</div>")
+      fixture.detectChanges()
+      let debugElement = fixture.debugElement.queryAll(By.css("div"))
+      expect(debugElement.length).toEqual(1)
+      expect(debugElement[0].nativeElement.textContent).toEqual('This should display')
     })
 
     describe("unit tests", () => {
@@ -91,5 +94,20 @@ describe("directives", () => {
 
   `
 })
-class AppComponent {
+class TestComponent {
+  roles = ['ROLE_ADMIN', 'ROLE_PUBLIC']
+}
+
+function createDefaultTestComponent() {
+  //   // create component and test fixture
+  fixture = TestBed.createComponent(TestComponent)
+
+  //   // get test component from the fixture
+  comp = fixture.componentInstance
+
+}
+
+function createTestComponent(template: string): ComponentFixture<TestComponent> {
+  return TestBed.overrideComponent(TestComponent, {set: {template: template}})
+      .createComponent(TestComponent)
 }

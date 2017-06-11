@@ -24,4 +24,13 @@ describe('RoleDirective', () => {
         expect(result).toContain('b')
         expect(result.length).toEqual(2)
     })
+
+    it('should accept array in split roles', () => {
+        let directive = new RoleDirectiveTest(null, null, null)
+        let result = directive.splitRoles(['a', 'b'])
+        expect(result).toContain('a')
+        expect(result).toContain('b')
+        expect(result.length).toEqual(2)
+    })
+
 })

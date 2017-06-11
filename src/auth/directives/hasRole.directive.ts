@@ -16,7 +16,7 @@ export class HasRole extends RoleDirective {
   }
 
   @Input()
-  set secHasRole(roles: any) {
+  set secHasRole(roles: string | string[]) {
     this._context.$roles = roles
     this.applyDirective()
   }

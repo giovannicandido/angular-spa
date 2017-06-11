@@ -26,7 +26,10 @@ export abstract class RoleDirective {
         this.domService.performAction(this.element, this._templateRef, this._context, result)
     }
 
-    splitRoles(roles: string): string[] {
+    splitRoles(roles: string | string[]): string[] {
+        if (roles instanceof Array) {
+            return roles
+        }
         return splitRoles(roles)
     }
 }
