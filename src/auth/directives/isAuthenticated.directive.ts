@@ -1,31 +1,45 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, ElementRef } from '@angular/core'
 import { AuthService } from '../auth.service'
 import { hideFromDom, showHidden } from '../dom/dom.service'
+import { DomService } from '../dom/dom.service'
+import { RoleContext } from './interfaces'
+
 /**
  * This directive is like *ngIf.
- * The DOM is hidden only if user is authenticated
+ * The DOM is renderer only if user is authenticated
  * For the oposite use **secIsNotAuthenticated**
  */
 @Directive({ selector: '[secIsAuthenticated]' })
 export class SecIsAuthenticated {
 
-  constructor(
-    private element: ElementRef,
-    private auth: AuthService
-  ) {
-    hideFromDom(element)
-   }
+  private _context = new RoleContext()
 
-  ngOnInit() {
-    this.auth.isUserLoggedIn().then(logged => {
-      if (logged) {
-        showHidden(this.element)
-      } else {
-        hideFromDom(this.element)
-      }
-    })
+  constructor(
+    protected element: ViewContainerRef,
+    protected domService: DomService,
+    private auth: AuthService,
+    private templateRef: TemplateRef<RoleContext>
+  ) {
   }
 
+  @Input('secIsAuthenticated')
+  set action(config: any) {
+    if (config && config.action) {
+      this._context.$action = config.action
+
+    }
+    if (config && config.cssClass) {
+      this._context.$cssClass = config.cssClass
+    }
+    this.applyDirective()
+  }
+
+  applyDirective() {
+    this.element.clear()
+    this.auth.isUserLoggedIn().then(logged => {
+       this.domService.performAction(this.element, this.templateRef, this._context, logged)
+    })
+  }
 }
 
 /**
@@ -36,21 +50,31 @@ export class SecIsAuthenticated {
 @Directive({ selector: '[secIsNotAuthenticated]' })
 export class SecIsNotAuthenticated {
 
+  private _context = new RoleContext()
+
   constructor(
-    private element: ElementRef,
-    private auth: AuthService
+    protected element: ViewContainerRef,
+    protected domService: DomService,
+    private auth: AuthService,
+    private templateRef: TemplateRef<RoleContext>
   ) {
-    hideFromDom(element)
   }
 
-  ngOnInit() {
+  @Input('secIsNotAuthenticated')
+  set action(config: any) {
+    if (config && config.action) {
+        this._context.$action = config.action
+    }
+    if (config && config.cssClass) {
+        this._context.$cssClass = config.cssClass
+    }
+
+    this.applyDirective()
+  }
+  applyDirective() {
+    this.element.clear()
     this.auth.isUserLoggedIn().then(logged => {
-      if (!logged) {
-        showHidden(this.element)
-      } else {
-        hideFromDom(this.element)
-      }
+      this.domService.performAction(this.element, this.templateRef, this._context, !logged)
     })
   }
-
 }
