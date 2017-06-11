@@ -1,4 +1,4 @@
-baseURL = "https://github.io/atende/angular-spa"
+baseURL = "https://angular-spa.netlify.com"
 languageCode = "en-us"
 title = "Angular SPA Library"
 

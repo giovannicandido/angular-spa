@@ -25,7 +25,7 @@ for other usefull project.
 
 # Documentation
 
-See [docs](./docs) folder or go to http://github.io/atende/spring-spa
+Latest stable documentation is published in [https://angular-spa.netlify.com](https://angular-spa.netlify.com)
 
 # Motivation
 
