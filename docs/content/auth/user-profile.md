@@ -9,7 +9,8 @@ weight = 51
 You can get the username, fullName and other informations from keycloak
 
 Just inject **AuthService** and use **getLoginAccout()** method with return a **Observable<Account>**
-    
+
+```typescript  
     import { AuthService } from 'angular-spa/auth'
     
     export class AppComponent {
@@ -23,8 +24,9 @@ Just inject **AuthService** and use **getLoginAccout()** method with return a **
         })
       }
     }
+```
 
 **AuthService** has methods to *login*, *logout*, *isUserLoggedIn*, *getLoginAccount* and others.
 It also provide access to the underline keycloak object that has all KeycloakJS API.
 
-See [https://keycloak.gitbooks.io/securing-client-applications-guide/content/v/2.4/topics/oidc/javascript-adapter.html](https://keycloak.gitbooks.io/securing-client-applications-guide/content/v/2.4/topics/oidc/javascript-adapter.html)
+See [Keycloak Javascript Adapter](https://www.keycloak.org/docs/latest/securing_apps/index.html#_javascript_adapter)

@@ -19,12 +19,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/giovanni/angular-spa.git"
+    "url": "https://github.com/giovannicandido/angular-spa.git"
   },
   "bugs": {
-    "url": "https://github.com/giovanni/angular-spa/issues"
+    "url": "https://github.com/giovannicandido/angular-spa/issues"
   },
-  "homepage": "https://github.com/giovanni/angular-spa#readme",
+  "homepage": "https://github.com/giovannicandido/angular-spa#readme",
   "peerDependencies": {
     "@angular/common": ">=4.0.0 <6.0.0",
     "@angular/core": ">=4.0.0 <6.0.0",

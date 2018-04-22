@@ -15,7 +15,7 @@ This directives **remove** or **add** the element from the DOM based on security
 * __*secHasAnyRole__
 * __*secHasNotRoles__
 
-{{% notice info %}}
+{{% notice tip %}}
 **Note:** In all directives, you can also opt-in to add a class in the element, instead of removing it. Useful if you want
 to keep the element in DOM. For example to just disable a button using css class _disabled_
 {{% /notice %}}
@@ -129,9 +129,9 @@ You can also configure the global behaviour. Overriding the provider for **SecDi
 
 ```typescript
 
-    import { NgModule } from '@angular/core';
+    import { NgModule } from '@angular/core'
     
-    import { AppComponent } from './app.component';
+    import { AppComponent } from './app.component'
     
     import {AuthModule, SecDirectiveConfig, SecAction, InitOptions} from "angular-spa/auth"
     

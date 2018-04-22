@@ -19,13 +19,13 @@
     "copyfiles": "cp -rf package.dist.json dist/package.json && cp -rf README.md LICENSE dist",
     "transpile": "ngc",
     "package": "rollup -c",
-    "minify": "uglifyjs dist/bundles/angular-spa.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/angular-spa.umd.min.js",
+    "minify": "uglifyjs dist/src/bundles/angular-spa.umd.js --screw-ie8 --compress --mangle --comments --output dist/src/bundles/angular-spa.umd.min.js",
     "keepVersion": "export version=`json -f package.json version`;json -I -f package.dist.json -e `echo \"this.version='$version'\"`",
-    "build": "npm run clean && npm run transpile && npm run package && npm run minify && npm run keepVersion && npm run copyfiles"
+    "build": "npm run clean && npm run transpile && npm run package && npm run minify && npm run copyfiles"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/giovanni/angular-spa.git"
+    "url": "git+https://github.com/giovannicandido/angular-spa.git"
   },
   "keywords": [
     "angular2",
@@ -38,9 +38,9 @@
   "author": "Giovanni Silva",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/giovanni/angular-spa/issues"
+    "url": "https://github.com/giovannicandido/angular-spa/issues"
   },
-  "homepage": "https://github.com/giovanni/angular-spa#readme",
+  "homepage": "https://github.com/giovannicandido/angular-spa#readme",
   "dependencies": {
     "@angular/common": ">=4.0.0 <6.0.0",
     "@angular/core": ">=4.0.0 <6.0.0",

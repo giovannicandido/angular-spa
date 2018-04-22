@@ -2,6 +2,7 @@
 title = "Ajaxtimeout"
 date =  2018-04-22T16:47:17-03:00
 weight = 100
+draft = true
 +++
 
 # AjaxTimeout Interceptor
