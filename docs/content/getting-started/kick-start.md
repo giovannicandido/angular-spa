@@ -11,5 +11,3 @@ weight = 5
     npm install --save angular-spa
     # If using yarn
     yarn add angular-spa
-
-Import and configure one of the modules. See [Module List]({{< ref "what-is-included.md" >}})
