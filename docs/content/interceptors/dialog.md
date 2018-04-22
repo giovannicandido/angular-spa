@@ -2,6 +2,7 @@
 title = "Dialog"
 date =  2018-04-22T16:46:55-03:00
 weight = 100
+draft = true
 +++
 
 # Dialog Interceptor

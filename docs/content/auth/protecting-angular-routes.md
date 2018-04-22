@@ -10,6 +10,7 @@ To protect Angular Routes, use the **LoginGuard** service
 
 For example, in **app.routes.ts**
 
+```typescript
     import { Routes, RouterModule } from "@angular/router"
     import { HomeComponent } from "./home/home.component"
     import { RegistrationsComponent } from "./registrations/registrations.component"
@@ -46,4 +47,4 @@ For example, in **app.routes.ts**
     
     export const routeDeclarations = appRoutes.map(r => r.component)
     export const routes = RouterModule.forRoot(appRoutes)
-
+```
