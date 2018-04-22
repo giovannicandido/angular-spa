@@ -14,10 +14,10 @@ export class LoginGuard {
   canActivate(): Promise<boolean> {
     this.auth.isUserLoggedIn().then(v => {
       if (!v) {
-        this.auth.login();
+        this.auth.login()
       }
     })
-    return this.auth.isUserLoggedIn();
+    return this.auth.isUserLoggedIn()
 
   }
 }

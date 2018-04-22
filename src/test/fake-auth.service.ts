@@ -63,7 +63,7 @@ export class FakeAuthService extends AuthService {
     roles: string[]
     resource: string
     constructor() {
-        let account = new Account()
+        let account: Account = {} as any
         let keycloak = <any>new FakeKeycloak(account)
         super(null, keycloak)
         this.keycloak = keycloak
@@ -91,7 +91,7 @@ export class FakeAuthService extends AuthService {
         let isRole = this.roles.indexOf(role) !== -1
         if (!resource) {
             return isRole
-        }else {
+        } else {
             return (isRole && this.resource === resource)
         }
     }

@@ -328,7 +328,7 @@ export class AuthService {
   constructor(config: InitOptions, @Inject(KEYCLOAK_TYPE) @Optional() keycloak?: KeycloakType) {
     if (!keycloak) {
       this.keycloak = new Keycloak(config)
-    }else {
+    } else {
       this.keycloak = keycloak
     }
     this._onReady = new Subject()

@@ -2,7 +2,7 @@
 date = "2017-06-11T13:20:30-03:00"
 title = "Protecting Angular Routes"
 toc = true
-weight = 5
+weight = 52
 
 +++
 

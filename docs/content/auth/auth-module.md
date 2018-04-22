@@ -1,33 +1,30 @@
 +++
 date = "2017-06-11T12:50:10-03:00"
 title = "Auth Module"
-weight = 4
+weight = 50
 
 +++
-
-Authentication and authorisation of any application using [Keycloak](http://www.keycloak.org) project.
-
 
 ## Usage
 
 This module depends on **keycloak.js** 
-[javascript adapter](https://keycloak.gitbooks.io/documentation/securing_apps/topics/oidc/javascript-adapter.html), 
-which is not included as a dependency, because you have many options in how to add it.
+[javascript adapter](https://www.keycloak.org/docs/latest/securing_apps/index.html#_javascript_adapter), 
+which is included as a dependency, but you have other options in how to add it.
 
-But you probably is using Angular CLI to generate your _client_ projects. See [Angular CLI Setup]({{< relref "#angular-cli-setup" >}})
+If you are using Angular CLI to generate your _client_ projects. See [Angular CLI Setup]({{< relref "#angular-cli-setup" >}})
 
 ### Import the module
 
 Import the **AuthModule** and create a provider for **InitOptions** with the configuration of 
-[Keycloak client](https://keycloak.gitbooks.io/documentation/server_admin/topics/clients.html). 
+[Keycloak client](https://www.keycloak.org/docs/latest/securing_apps/index.html). 
 
 You should create a **openid-connect** client type with access type **public**. 
 If you are using angular-cli, the app Root URL is http://localhost:4200
 
 In the example below, the module is configured with a keycloak server running on **http://localhost:9080/auth** URL
- with a client-id of **con-client** in the realm **master**.
+ with a client-id of **angular-spa-example** in the realm **master**.
 
-
+```typescript
     import { BrowserModule } from '@angular/platform-browser';
     import { NgModule } from '@angular/core';
     import { FormsModule } from '@angular/forms';
@@ -53,13 +50,18 @@ In the example below, the module is configured with a keycloak server running on
          useValue: {
              url: 'http://localhost:9080/auth',
              realm: 'master',
-             clientId: 'con-client'
+             clientId: 'angular-spa-example'
          }
        }
       ],
     bootstrap: [AppComponent]
     })
     export class AppModule { }
+```
+
+
+
+![Keycloak Screenshot](/images/screenshot-keycloak-admin.png)
 
 You can now inject **AuthService** in your components or services, and use it to authenticate the user. 
 But of course, is better to use the [Directives]({{< ref "auth/directives.md" >}}) 
@@ -68,7 +70,7 @@ and [Router Guards]({{< ref "auth/protecting-angular-routes.md" >}}) of the modu
 
 ## Angular CLI Setup
 
-Install __keycloak-js__ npm package
+The package **keycloak-js** is installed as transitive dependency. But if you want install:
 
     npm install --save keycloak-js
 
@@ -78,3 +80,5 @@ file:
     "scripts": [
         "../node_modules/keycloak-js/dist/keycloak.min.js"
       ],
+
+[keycloakscreenshot]: /images/screenshot-keycloak-admin.png
