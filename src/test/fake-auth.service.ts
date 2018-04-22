@@ -91,7 +91,7 @@ export class FakeAuthService extends AuthService {
         let isRole = this.roles.indexOf(role) !== -1
         if (!resource) {
             return isRole
-        }else {
+        } else {
             return (isRole && this.resource === resource)
         }
     }

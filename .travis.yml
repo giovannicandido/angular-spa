@@ -1,7 +1,7 @@
 dist: trusty
 language: node_js
 node_js:
-  - "6"
+  - "8"
 os:
   - linux
 env:
@@ -12,7 +12,7 @@ env:
 before_script:
   - sh -e /etc/init.d/xvfb start
 install:
-  - yarn install
+  - npm install
 script:
   - npm run lint
   - npm run test:ci

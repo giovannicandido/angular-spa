@@ -19,8 +19,8 @@ You can find clues about it in this projects:
 
 Have fun ;-)
 
-[Audit]: https://github.com/atende/audit-docs
+[Audit]: https://github.com/giovannicandido/audit-docs
 [Spring SPA]: https://github.com/giovannicandido/generator-spring-spa
-[Notification Server]: https://github.com/atende/notification-server
-[bimage]: https://travis-ci.org/atende/angular-spa.svg?branch=master
-[bstatus]: https://travis-ci.org/atende/angular-spa
+[Notification Server]: https://github.com/giovannicandido/notification-server
+[bimage]: https://travis-ci.org/giovannicandido/angular-spa.svg?branch=master
+[bstatus]: https://travis-ci.org/giovannicandido/angular-spa

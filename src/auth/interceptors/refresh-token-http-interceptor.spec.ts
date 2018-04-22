@@ -16,7 +16,7 @@ describe("refresh-token-http-interceptor", () => {
     TestBed.configureTestingModule({
       imports: [
         HttpModule,
-        AuthModule,
+        AuthModule
       ],
       declarations: [AppComponent],
       providers: [

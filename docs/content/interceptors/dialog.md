@@ -1,3 +1,9 @@
++++
+title = "Dialog"
+date =  2018-04-22T16:46:55-03:00
+weight = 100
++++
+
 # Dialog Interceptor
 
 This interceptor create a notification for any text or html loaded in a ajax call.
@@ -19,7 +25,7 @@ Import DialogInterceptor and DialogService and create a provider for it
 
 ```typescript
     import {InterceptorModule, Interceptor} from "angular-http-interceptor"
-    import { DialogInterceptor, DialogService } from "angular-http-interceptor/interceptors/dialog"
+    import { DialogInterceptor, DialogService } from "angular-spa/interceptors/dialog"
 
     @NgModule({
         declarations: [
@@ -69,7 +75,7 @@ Just provide a custom implementantion for DialogService
 
 ```typescript
     import {InterceptorModule, Interceptor} from "angular-http-interceptor"
-    import { DialogInterceptor, DialogService } from "angular-http-interceptor/interceptors/dialog"
+    import { DialogInterceptor, DialogService } from "angular-spa/interceptors/dialog"
 
     class MyDialogService implements DialogService {
         showMessage(message: string, status: string): void {
@@ -109,51 +115,4 @@ Just provide a custom implementantion for DialogService
          export class AppModule { }
 ```
 
-I recomend that you see the [source code](./src/interceptor/dialog.ts) for DialogInterceptor to know where it is trigged
-
-# AjaxTimeout Interceptor
-
-This interceptor call a login service if the response is 901. This is a custom response status for timeout expiration.
-
-## Usage
-```typescript
-    import {InterceptorModule, Interceptor} from "angular-http-interceptor"
-    import { AjaxTimeoutInterceptor, LoginService } from "angular-http-interceptor/interceptors/ajaxtimeout";
-
-    class MyLoginService implements LoginService {
-        login() {
-            window.location = "/sso/login";
-        }
-        // This method will be called on AjaxTimeout
-        loginExpired() {
-            UIkit.confirm("Your session has expired, do you want login?", () => {
-                this.login();
-            })
-            
-        }
-    }
-
-    @NgModule({
-         declarations: [
-             AppComponent
-         ],
-         imports: [
-             BrowserModule,
-             FormsModule,
-             HttpModule,
-             InterceptorModule
-         ],
-         providers: [
-            {
-                 provide: LoginService,
-                 useClass: MyLoginService
-            }, {
-                provide: Interceptor,
-                useClass: AjaxTimeoutInterceptor,
-                multi: true
-            }
-         ],
-         bootstrap: [AppComponent]
-         })
-         export class AppModule { }
-```
+I recomend that you see the [source code](https://github.com/giovannicandido/angular-spa/tree/master/src/interceptors/dialog.ts) for DialogInterceptor to know when it is trigged

@@ -1,6 +1,6 @@
 import { Account } from "./account"
 
-describe("account", function(){
+describe("account", function() {
     it("should verify accountInRole", () => {
         let account = new Account()
         account.authorities = ['ROLE_ADMIN', 'ROLE_USER']

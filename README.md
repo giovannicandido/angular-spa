@@ -16,12 +16,9 @@ you don't have things for user management like: create, update, password reset, 
 a separate Single Sign On server [Keycloak](https://keycloak.org) that ships with all and way more.
 * Directives for security template display. This let you conditionally display user UI elements
 based on user roles and authorities.
-* UI elements - LoadingBar, Menus, and other little things. This are more specific for the
-projects I create. Do not interpret me wrong here, I'm not trying to compete with huge UI frameworks,
-but somethings are just too repetitive. We will not put unnecessary dependencies 
-to make this project very slim for everyone.
+* Interceptors - Common use case for interceptors like: Dialog for messages, ajaxtimeout
 
-You probally want check [angular-http-interceptor](https://github.com/giovannicandido/angular-http-interceptor)
+I recommend check [angular-http-interceptor](https://github.com/giovannicandido/angular-http-interceptor)
 for other usefull project.
 
 # Documentation
