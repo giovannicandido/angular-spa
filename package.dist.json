@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/giovannicandido/angular-spa/issues"
   },
-  "homepage": "https://github.com/giovannicandido/angular-spa#readme",
+  "homepage": "https://angular-spa.netlify.com",
   "peerDependencies": {
     "@angular/common": ">=4.0.0 <6.0.0",
     "@angular/core": ">=4.0.0 <6.0.0",
