@@ -1,7 +1,7 @@
 {
   "name": "angular-spa",
   "version": "1.1.0",
-  "description": "Utilities for angular 2 applications backed by generator-spring-spa project",
+  "description": "Utilities for enterprise angular single page applications",
   "main": "bundles/angular-spa.umd.js",
   "module": "index.js",
   "typings": "index.d.ts",
@@ -13,7 +13,8 @@
     "utils",
     "ui",
     "keycloak",
-    "security"
+    "security",
+    "authentication"
   ],
   "author": "Giovanni Silva",
   "license": "MIT",
