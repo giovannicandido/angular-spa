@@ -1,7 +1,7 @@
 {
   "name": "angular-spa",
   "version": "1.1.0",
-  "description": "Utilities for angular 2 applications backed by generator-spring-spa project",
+  "description": "Utilities for enterprise angular single page applications",
   "main": "index.js",
   "angular-cli": {},
   "scripts": {
@@ -29,18 +29,20 @@
   },
   "keywords": [
     "angular2",
+    "angular",
     "ng2",
     "utils",
     "ui",
     "keycloak",
-    "security"
+    "security",
+    "authentication"
   ],
   "author": "Giovanni Silva",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/giovannicandido/angular-spa/issues"
   },
-  "homepage": "https://github.com/giovannicandido/angular-spa#readme",
+  "homepage": "https://angular-spa.netlify.com",
   "dependencies": {
     "@angular/common": ">=4.0.0 <6.0.0",
     "@angular/core": ">=4.0.0 <6.0.0",
